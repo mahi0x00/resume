@@ -1,0 +1,574 @@
+:root {
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --heading-color: #f0f6fc;
+    --border-color: #30363d;
+    --primary-color: #238636;
+    --secondary-color: #2ea043;
+    --accent-color: #58a6ff;
+    --danger-color: #f85149;
+}
+
+body.light-theme {
+    --bg-color: #ffffff;
+    --text-color: #24292e;
+    --heading-color: #24292e;
+    --border-color: #e1e4e8;
+    --primary-color: #2ea44f;
+    --secondary-color: #34d058;
+    --accent-color: #0366d6;
+    --danger-color: #d73a49;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Theme toggle styles */
+.theme-toggle-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: rotate(30deg);
+}
+
+.dark-icon {
+    display: none;
+}
+
+.light-icon {
+    display: inline-block;
+}
+
+body.light-theme .dark-icon {
+    display: inline-block;
+}
+
+body.light-theme .light-icon {
+    display: none;
+}
+
+/* Header styles */
+header {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Profile section */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: visible;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+    transition: transform 0.2s ease-out;
+    transform-origin: center center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-content {
+    flex: 1;
+}
+
+.profile-content h1 {
+    color: var(--heading-color);
+    font-size: 2.8rem;
+    margin-bottom: 5px;
+    font-family: var(--name-font);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.profile-links {
+    display: flex;
+    gap: 15px;
+}
+
+.profile-links a {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    transition: color 0.3s;
+    margin-right: 15px;
+}
+
+.profile-links a:last-child {
+    margin-right: 0;
+}
+
+.profile-links a:hover {
+    color: var(--accent-color);
+}
+
+.profile-links a[title="Download Resume"] {
+    color: var(--accent-color);
+}
+
+.profile-links a[title="Download Resume"]:hover {
+    color: var(--primary-color);
+}
+
+/* Main content styles */
+main {
+    padding: 40px 0;
+}
+
+section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    color: var(--heading-color);
+    font-size: 1.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.section-header h2 i {
+    color: var(--accent-color);
+}
+
+/* About section */
+.about p {
+    font-size: 1.1rem;
+}
+
+.about-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.about-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.about-list li:before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Skills section */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.skill-category h3 {
+    color: var(--heading-color);
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.skill-category ul {
+    list-style-type: none;
+}
+
+.skill-category li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+.skill-category li:before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Experience section - LinkedIn style */
+.experience-item {
+    margin-bottom: 30px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
+}
+
+.experience-logo-container {
+    flex: 0 0 56px;
+    margin-right: 16px;
+}
+
+.company-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.experience-content {
+    flex: 1;
+    position: relative;
+}
+
+.experience-title {
+    color: var(--heading-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    padding-right: 200px;
+}
+
+.experience-company {
+    color: var(--heading-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 4px 0;
+    padding-right: 200px;
+}
+
+.experience-date-location {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.experience-location {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    text-align: right;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.experience-item ul {
+    padding-left: 0;
+    margin-top: 28px;
+}
+
+.experience-item li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.experience-item li:before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Experience skills tags */
+.experience-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.experience-skills span {
+    color: var(--heading-color);
+    padding: 2px 8px;
+    border: 1px solid var(--accent-color);
+    border-radius: 15px;
+    font-size: 0.75rem;
+    background-color: rgba(88, 166, 255, 0.05);
+}
+
+/* Projects section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card h3 {
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.project-card p {
+    margin-bottom: 15px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-tags span {
+    color: var(--heading-color);
+    padding: 3px 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* Education section - LinkedIn style */
+.education-item {
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+}
+
+.education-logo-container {
+    flex: 0 0 56px;
+    margin-right: 16px;
+}
+
+.institution-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.education-content {
+    flex: 1;
+    position: relative;
+}
+
+.education-title {
+    color: var(--heading-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    padding-right: 200px;
+}
+
+.education-institution {
+    color: var(--heading-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 4px 0;
+    padding-right: 200px;
+}
+
+.education-date-location {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.education-location {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    text-align: right;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Certifications section */
+.certifications-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 20px;
+}
+
+.certification-item {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.certification-item h3 {
+    color: var(--heading-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.certification-date {
+    color: var(--text-color);
+    font-size: 0.85rem;
+}
+
+/* Footer styles */
+footer {
+    border-top: 1px solid var(--border-color);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .profile {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-links {
+        justify-content: center;
+    }
+    
+    .projects-grid,
+    .certifications-container {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Adjust experience and education sections for mobile */
+    .experience-title,
+    .experience-company,
+    .education-title,
+    .education-institution {
+        padding-right: 0;
+    }
+    
+    .experience-date-location,
+    .experience-location,
+    .education-date-location,
+    .education-location {
+        position: static;
+        text-align: left;
+        margin-top: 4px;
+    }
+    
+    .experience-item ul {
+        margin-top: 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Remove old company and institution header styles */
+.company-header, .institution-header,
+.company-info, .institution-info {
+    display: none;
+}
+
+/* Text hover effects */
+.about p, .about-list li, .skill-category li, 
+.experience-item li, .project-card p, .experience-title, 
+.experience-company, .education-title, .education-institution, 
+.certification-item h3, .profile-content h1, .subtitle, 
+.section-header h2, .skill-category h3, .experience-skills span {
+    transition: all 0.2s ease;
+}
+
+.about p:hover, .about-list li:hover, .skill-category li:hover, 
+.experience-item li:hover, .project-card p:hover, .experience-title:hover, 
+.experience-company:hover, .education-title:hover, .education-institution:hover, 
+.certification-item h3:hover, .profile-content h1:hover, .subtitle:hover,
+.section-header h2:hover, .skill-category h3:hover, .experience-skills span:hover {
+    text-shadow: 0 0 0.7px currentColor, 0 0 1px currentColor;
+    color: var(--accent-color);
+    cursor: default;
+}
+
+.experience-skills span:hover {
+    background-color: rgba(88, 166, 255, 0.15);
+    border-color: var(--accent-color);
+} 
