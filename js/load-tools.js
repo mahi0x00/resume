@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('tools.json')
+    fetch('tools.json') // Ensure this path is correct relative to your HTML file
         .then(response => {
             console.log('Fetch response:', response);
             return response.json();
