@@ -137,6 +137,14 @@ header {
     position: static;
 }
 
+.name .last-name {
+    visibility: hidden;
+}
+
+.name:hover .last-name {
+    visibility: visible;
+}
+
 .subtitle {
     font-size: 1.3rem;
     color: var(--text-color);

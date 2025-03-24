@@ -165,7 +165,8 @@ function loadResumeData() {
  */
 function loadPersonalInfo(xmlDoc) {
     const personal = xmlDoc.getElementsByTagName("personal")[0];
-    const name = personal.getElementsByTagName("name")[0].textContent;
+    const firstName = personal.getElementsByTagName("firstName")[0].textContent;
+    const lastName = personal.getElementsByTagName("lastName")[0].textContent;
     const title = personal.getElementsByTagName("title")[0].textContent;
     const profileImage = personal.getElementsByTagName("profileImage")[0].textContent;
     const email = personal.getElementsByTagName("email")[0].textContent;
@@ -174,7 +175,8 @@ function loadPersonalInfo(xmlDoc) {
     const resumePdf = personal.getElementsByTagName("resumePdf")[0].textContent;
     
     // Update the DOM with personal information
-    document.querySelector('.profile-content h1').textContent = name;
+    document.querySelector('.profile-content h1 .first-name').textContent = firstName;
+    document.querySelector('.profile-content h1 .last-name').textContent = lastName;
     document.querySelector('.profile-content .subtitle').textContent = title;
     document.querySelector('.profile-image').src = profileImage;
     document.querySelector('.profile-links a[title="Email"]').href = `mailto:${email}`;
