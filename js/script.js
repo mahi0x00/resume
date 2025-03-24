@@ -222,6 +222,8 @@ function loadResumeData() {
             
             // Update footer
             updateFooter(xmlDoc);
+
+            loadToolsSection(xmlDoc); // Add this line
         }
     };
     xhr.open("GET", "resumeData.xml", true);
@@ -625,6 +627,40 @@ function loadCertificationsSection(xmlDoc) {
 }
 
 /**
+ * Loads tools section from XML
+ */
+function loadToolsSection(xmlDoc) {
+    const tools = xmlDoc.getElementsByTagName("tools")[0];
+    const toolItems = tools.getElementsByTagName("tool");
+    const toolsContainer = document.querySelector('.tools-container');
+    
+    // Clear existing tools
+    toolsContainer.innerHTML = '';
+    
+    // Add tools from XML
+    for (let i = 0; i < toolItems.length; i++) {
+        const tool = toolItems[i];
+        const name = tool.getElementsByTagName("name")[0].textContent;
+        const logo = tool.getElementsByTagName("logo")[0].textContent;
+        
+        const toolItem = document.createElement('div');
+        toolItem.className = 'tool-item';
+        
+        const toolLogo = document.createElement('img');
+        toolLogo.src = logo;
+        toolLogo.alt = name + ' logo';
+        toolLogo.className = 'tool-logo';
+        
+        const toolName = document.createElement('p');
+        toolName.textContent = name;
+        
+        toolItem.appendChild(toolLogo);
+        toolItem.appendChild(toolName);
+        toolsContainer.appendChild(toolItem);
+    }
+}
+
+/**
  * Updates footer with name from XML
  */
 function updateFooter(xmlDoc) {
@@ -633,4 +669,4 @@ function updateFooter(xmlDoc) {
     
     const footerText = document.querySelector('footer p');
     footerText.innerHTML = `&copy; <span id="current-year">${new Date().getFullYear()}</span> ${name}. All rights reserved.`;
-} 
+}

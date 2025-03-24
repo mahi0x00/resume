@@ -23,7 +23,7 @@ A modern, GitHub-themed portfolio website for Application Security Engineers, bu
    - Replace the profile image URL with your own image
 
 3. **Content Sections**
-   - Update each section in the XML file (`<about>`, `<skills>`, `<experience>`, etc.)
+   - Update each section in the XML file (`<about>`, `<skills>`, `<experience>`, `<tools>`, etc.)
    - Add or remove items in each section as needed
 
 4. **Styling**
@@ -63,6 +63,9 @@ The `resumeData.xml` file contains all your resume content and is structured as 
     <certifications>
         <!-- Certification entries -->
     </certifications>
+    <tools>
+        <!-- Tools entries -->
+    </tools>
 </resume>
 ```
 
@@ -111,4 +114,4 @@ This project is open source and available under the [MIT License](LICENSE).
 ## Acknowledgments
 
 - Font Awesome for the icons
-- GitHub's design for inspiration 
+- GitHub's design for inspiration

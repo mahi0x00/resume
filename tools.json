@@ -1,0 +1,60 @@
+{
+    "tools": [
+        {
+            "name": "Burp Suite",
+            "logo": "https://www.opsmx.com/wp-content/uploads/2024/09/Burp-suite-pro-1.svg"
+        },
+        {
+            "name": "OWASP Threat Dragon",
+            "logo": "https://owasp.org/www-project-threat-dragon/assets/images/cupcake-256x256.png"
+        },
+        {
+            "name": "OWASP Dependency-Track",
+            "logo": "https://raw.githubusercontent.com/DependencyTrack/branding/refs/heads/master/dt-logo-vertical.svg"
+        },
+        {
+            "name": "Anchore",
+            "logo": "https://cdn-dllid.nitrocdn.com/lfaFdmeTaONuMeYAvisIiEiZRrNJpVpd/assets/images/source/rev-3aa83a1/anchore.com/wp-content/uploads/2023/01/logo-1.svg"
+        },
+        {
+            "name": "Tenable",
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tenable%2C_Inc._logo.svg/1598px-Tenable%2C_Inc._logo.svg.png?20240929020540"
+        },
+        {
+            "name": "Mitre ATT&CK",
+            "logo": "https://www.acalvio.com/wp-content/uploads/2019/08/mitrefeatureimg3.jpg"
+        },
+        {
+            "name": "Caldera",
+            "logo": "https://caldera.mitre.org/img/caldera-logo.png"
+        },
+        {
+            "name": "Kali",
+            "logo": "https://www.kali.org/images/kali-logo.svg"
+        },
+        {
+            "name": "Docker",
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/7/70/Docker_logo.png"
+        },
+        {
+            "name": "Terraform",
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Terraform_Logo.svg/1024px-Terraform_Logo.svg.png"
+        },
+        {
+            "name": "AWS",
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-Amazon_Web_Services_Logo.svg.png"
+        },
+        {
+            "name": "Github",
+            "logo": "https://1000logos.net/wp-content/uploads/2018/11/GitHub-logo.jpg"
+        },
+        {
+            "name": "Git",
+            "logo": "https://git-scm.com/images/logos/2color-lightbg@2x.png"
+        },
+        {
+            "name": "Postman",
+            "logo": "https://voyager.postman.com/logo/postman-logo-orange-stacked.svg"
+        }
+    ]
+}
