@@ -1,0 +1,7 @@
+.name .last-name {
+    visibility: hidden;
+}
+
+.name:hover .last-name {
+    visibility: visible;
+}

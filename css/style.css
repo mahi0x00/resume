@@ -121,6 +121,20 @@ header {
     font-family: var(--name-font);
     font-weight: 800;
     letter-spacing: 1px;
+    position: relative;
+}
+
+.profile-content h1 .last-name {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+    position: absolute;
+}
+
+.profile-content h1:hover .last-name {
+    visibility: visible;
+    opacity: 1;
+    position: static;
 }
 
 .subtitle {
@@ -651,7 +665,6 @@ footer {
 .experience-company:hover, .education-title:hover, .education-institution:hover, 
 .certification-item h3:hover, .profile-content h1:hover, .subtitle:hover,
 .section-header h2:hover, .skill-category h3:hover, .experience-skills span:hover {
-    text-shadow: 0 0 0.7px currentColor, 0 0 1px currentColor;
     color: var(--accent-color);
     cursor: default;
 }
