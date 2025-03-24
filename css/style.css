@@ -149,6 +149,7 @@ header {
     font-size: 1.3rem;
     color: var(--text-color);
     margin-bottom: 15px;
+    font-style: italic;
 }
 
 .profile-links {
@@ -375,6 +376,21 @@ section:last-child {
     background-color: rgba(88, 166, 255, 0.05);
 }
 
+.experience-date-location:before,
+.experience-location:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.experience-date-location:before {
+    content: "\f073"; /* Font Awesome calendar icon */
+}
+
+.experience-location:before {
+    content: "\f3c5"; /* Font Awesome map-marker-alt icon */
+}
+
 /* Projects section */
 .projects-grid {
     display: grid;
@@ -482,6 +498,21 @@ section:last-child {
     color: var(--text-color);
     font-size: 0.85rem;
     font-weight: bold;
+}
+
+.education-date-location:before,
+.education-location:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.education-date-location:before {
+    content: "\f073"; /* Font Awesome calendar icon */
+}
+
+.education-location:before {
+    content: "\f3c5"; /* Font Awesome map-marker-alt icon */
 }
 
 /* Certifications section */

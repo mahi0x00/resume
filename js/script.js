@@ -118,6 +118,29 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.borderColor = '';
         });
     });
+
+    // Typewriter effect for last name
+    const lastNameElement = document.querySelector('.profile-content h1 .last-name');
+    const lastName = lastNameElement.textContent;
+    lastNameElement.textContent = '';
+    
+    function typeWriter(text, element, delay = 50) {
+        let index = 0;
+        element.textContent = ''; // Clear the text content before starting
+        function type() {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, delay);
+            }
+        }
+        type();
+    }
+
+    document.querySelector('.profile-content h1').addEventListener('mouseenter', () => {
+        lastNameElement.style.visibility = 'visible';
+        typeWriter(lastName, lastNameElement);
+    });
 });
 
 /**
