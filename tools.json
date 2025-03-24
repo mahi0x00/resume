@@ -55,6 +55,14 @@
         {
             "name": "Postman",
             "logo": "https://voyager.postman.com/logo/postman-logo-orange-stacked.svg"
+        },
+        {
+            "name": "Grafana",
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/1024px-Grafana_logo.svg.png"
+        },
+        {
+            "name": "Jenkins",
+            "logo": "https://www.learntek.org/blog/wp-content/uploads/2018/05/jenkins_image.png"
         }
     ]
 }
