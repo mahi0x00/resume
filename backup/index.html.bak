@@ -180,40 +180,20 @@
             </div>
             <div class="certifications-container">
                 <div class="certification-item">
-                    <div class="certification-logo-container">
-                        <img src="https://www.eccouncil.org/wp-content/uploads/2022/03/ceh-practical.svg" alt="CEH logo" class="certification-logo">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Certified Information Systems Security Professional (CISSP)</h3>
-                        <span class="certification-date">2020</span>
-                    </div>
+                    <h3>Certified Information Systems Security Professional (CISSP)</h3>
+                    <span class="certification-date">2020</span>
                 </div>
                 <div class="certification-item">
-                    <div class="certification-logo-container">
-                        <img src="https://www.offsec.com/wp-content/uploads/2021/06/OSCP-removebg-preview-1.png" alt="OSCP logo" class="certification-logo">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Offensive Security Certified Professional (OSCP)</h3>
-                        <span class="certification-date">2019</span>
-                    </div>
+                    <h3>Offensive Security Certified Professional (OSCP)</h3>
+                    <span class="certification-date">2019</span>
                 </div>
                 <div class="certification-item">
-                    <div class="certification-logo-container">
-                        <img src="https://www.eccouncil.org/wp-content/uploads/ceh-badge-1-312x320-1.png" alt="CEH logo" class="certification-logo">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Certified Ethical Hacker (CEH)</h3>
-                        <span class="certification-date">2018</span>
-                    </div>
+                    <h3>Certified Ethical Hacker (CEH)</h3>
+                    <span class="certification-date">2018</span>
                 </div>
                 <div class="certification-item">
-                    <div class="certification-logo-container">
-                        <img src="https://www.giac.org/legacy/cert_logos/gwapt-logo-color.png" alt="GWAPT logo" class="certification-logo">
-                    </div>
-                    <div class="certification-content">
-                        <h3>GIAC Web Application Penetration Tester (GWAPT)</h3>
-                        <span class="certification-date">2017</span>
-                    </div>
+                    <h3>GIAC Web Application Penetration Tester (GWAPT)</h3>
+                    <span class="certification-date">2017</span>
                 </div>
             </div>
         </section>
@@ -232,6 +212,3 @@
     <script src="js/script.js"></script>
 </body>
 </html> 
-
-
-

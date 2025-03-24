@@ -585,19 +585,41 @@ function loadCertificationsSection(xmlDoc) {
         const cert = certItems[i];
         const title = cert.getElementsByTagName("title")[0].textContent;
         const year = cert.getElementsByTagName("year")[0].textContent;
+        const logoElement = cert.getElementsByTagName("logo")[0];
+        const logo = logoElement ? logoElement.textContent : null;
         
         const certItem = document.createElement('div');
         certItem.className = 'certification-item';
         
+        // Logo container
+        const logoContainer = document.createElement('div');
+        logoContainer.className = 'certification-logo-container';
+        
+        if (logo) {
+            const logoImg = document.createElement('img');
+            logoImg.src = logo;
+            logoImg.alt = title + ' logo';
+            logoImg.title = title;
+            logoImg.className = 'certification-logo';
+            logoContainer.appendChild(logoImg);
+        }
+        
+        certItem.appendChild(logoContainer);
+        
+        // Content container
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'certification-content';
+        
         const certTitle = document.createElement('h3');
         certTitle.textContent = title;
-        certItem.appendChild(certTitle);
+        contentContainer.appendChild(certTitle);
         
         const certYear = document.createElement('span');
         certYear.className = 'certification-date';
         certYear.textContent = year;
-        certItem.appendChild(certYear);
+        contentContainer.appendChild(certYear);
         
+        certItem.appendChild(contentContainer);
         certsContainer.appendChild(certItem);
     }
 }

@@ -143,20 +143,14 @@ Let's connect to build secure, future-proof solutions together!</summary>
     
     <certifications>
         <certification>
-            <title>Certified Information Systems Security Professional (CISSP)</title>
-            <year>2020</year>
+            <title>Certified Ethical Hacker - C|EH-V7</title>
+            <year>2013</year>
+            <logo>https://cloudtechfortune.com/wp-content/uploads/2021/06/Certified-Ethical-Hacker.png</logo>
         </certification>
         <certification>
-            <title>Offensive Security Certified Professional (OSCP)</title>
+            <title>Certified In Cybersecurity (ISC) </title>
             <year>2019</year>
-        </certification>
-        <certification>
-            <title>Certified Ethical Hacker (CEH)</title>
-            <year>2018</year>
-        </certification>
-        <certification>
-            <title>GIAC Web Application Penetration Tester (GWAPT)</title>
-            <year>2017</year>
+            <logo>https://cycubix.com/wp-content/uploads/2023/08/ISC2_CC_RGB__mark-300x300.jpeg</logo>
         </certification>
     </certifications>
 </resume> 
