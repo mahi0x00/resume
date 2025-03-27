@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
+    // Update last updated date in footer
+    const lastUpdated = new Date(document.lastModified);
+    document.getElementById('last-updated').textContent = lastUpdated.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
     // Smooth scrolling for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
