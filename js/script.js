@@ -66,12 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add scroll event listener to shrink the header
     const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
+
+    function updateHeader() {
         if (window.scrollY > 50) {
             header.classList.add('shrink');
         } else {
             header.classList.remove('shrink');
         }
+    }
+
+    window.addEventListener('scroll', () => {
+        requestAnimationFrame(updateHeader);
     });
 });
 
