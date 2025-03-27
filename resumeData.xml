@@ -14,11 +14,13 @@
     <about>
         <summary>
             <ul>
-                <li>Cybersecurity professional with 10+ years of experience in end-to-end digital product protection.</li>
-                <li>Expert in embedding security across SDLC, from threat modeling to advanced red team operations.</li>
-                <li>Skilled in aligning security practices with standards like PCI-DSS, SOC2, ISO27001, and FedRAMP.</li>
-                <li>Proficient in security requirement gathering and SSDLC implementation.</li>
-                <li>Experienced in penetration testing and advanced red team operations.</li>
+                <li>Building security frameworks tailored for scalable applications</li>
+                <li>Designing secure software development workflows that integrate seamlessly with agile teams</li>
+                <li>Finding and fixing vulnerabilities before attackers can exploit them</li>
+                <li>Automating security processes to keep up with fast-paced development cycles</li>
+                <li>Strengthening cloud and container security to ensure resilient deployments</li>
+                <li>Running immersive hackathons and hands-on training to build security-aware teams</li>
+                <li>Crafting advanced red teaming engagements to test organizational resilience</li>
             </ul>
         </summary>
     </about>
