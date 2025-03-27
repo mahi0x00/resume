@@ -14,11 +14,11 @@
     <about>
         <summary>
             <ul>
-                <li>Dynamic and results-oriented cybersecurity professional with over 10 years of experience in protecting digital products end-to-end.</li>
-                <li>I specialise in embedding security throughout the Software Development Lifecycle—from initial threat modeling and secure design, through rigorous penetration testing with tools like Burp Suite, SQLMap, and Nmap, to advanced red team operations utilizing Caldera and OpenBAS.</li>
-                <li>My approach seamlessly integrates proactive security automation and continuous monitoring using Anchore, Prometheus, and Grafana, ensuring that vulnerabilities are swiftly identified and mitigated.</li>
-                <li>Passionate about creating resilient systems, I excel in aligning robust security practices with industry standards such as PCI-DSS, SOC2, ISO27001, and FedRAMP, and driving secure innovation in DevSecOps environments.</li>
-                <li>Let's connect to build secure, future-proof solutions together!</li>
+                <li>Cybersecurity professional with 10+ years of experience in end-to-end digital product protection.</li>
+                <li>Expert in embedding security across SDLC, from threat modeling to advanced red team operations.</li>
+                <li>Skilled in aligning security practices with standards like PCI-DSS, SOC2, ISO27001, and FedRAMP.</li>
+                <li>Proficient in security requirement gathering and SSDLC implementation.</li>
+                <li>Experienced in penetration testing and advanced red team operations.</li>
             </ul>
         </summary>
     </about>

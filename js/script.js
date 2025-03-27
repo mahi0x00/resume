@@ -5,92 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Theme toggle functionality
-    const themeToggle = document.querySelector('.theme-toggle');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    // Add tooltip for theme toggle
-    themeToggle.setAttribute('title', 'Toggle theme (triple-click to use system preference)');
-    
-    // Function to update theme based on system preference
-    function updateThemeBySystemPreference() {
-        const currentTheme = localStorage.getItem('theme');
-        
-        // Only apply system preference if no manual preference is saved
-        if (!currentTheme) {
-            if (prefersDarkScheme.matches) {
-                document.body.classList.remove('light-theme');
-            } else {
-                document.body.classList.add('light-theme');
-            }
-        }
-    }
-    
-    // Function to reset to system preference
-    function resetToSystemPreference() {
-        // Clear saved preference
-        localStorage.removeItem('theme');
-        // Apply system preference
-        updateThemeBySystemPreference();
-    }
-    
-    // Check for saved theme preference or use the system preference
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'light') {
-        document.body.classList.add('light-theme');
-    } else if (currentTheme === 'dark') {
-        document.body.classList.remove('light-theme');
-    } else {
-        // No saved preference, use system preference
-        updateThemeBySystemPreference();
-    }
-    
-    // Toggle theme when button is clicked
-    let clickCount = 0;
-    let clickTimer = null;
-    
-    themeToggle.addEventListener('click', () => {
-        clickCount++;
-        
-        // Reset to system preference on triple click
-        if (clickCount === 3) {
-            resetToSystemPreference();
-            clickCount = 0;
-            clearTimeout(clickTimer);
-            return;
-        }
-        
-        // Normal toggle behavior for single click
-        if (clickCount === 1) {
-            document.body.classList.toggle('light-theme');
-            
-            // Save preference to localStorage
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        
-        // Reset click count after a delay
-        clearTimeout(clickTimer);
-        clickTimer = setTimeout(() => {
-            clickCount = 0;
-        }, 500);
-    });
-    
-    // Listen for changes in system color scheme preference
-    prefersDarkScheme.addEventListener('change', (event) => {
-        // Only apply if user hasn't set a manual preference
-        if (!localStorage.getItem('theme')) {
-            if (event.matches) {
-                document.body.classList.remove('light-theme');
-            } else {
-                document.body.classList.add('light-theme');
-            }
-        }
-    });
-
     // Smooth scrolling for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -140,6 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.profile-content h1').addEventListener('mouseenter', () => {
         lastNameElement.style.visibility = 'visible';
         typeWriter(lastName, lastNameElement);
+    });
+
+    // Add scroll event listener to shrink the header
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('shrink');
+        } else {
+            header.classList.remove('shrink');
+        }
     });
 });
 
@@ -237,34 +161,29 @@ function loadPersonalInfo(xmlDoc) {
  */
 function loadAboutSection(xmlDoc) {
     const about = xmlDoc.getElementsByTagName("about")[0];
-    const summaryPoints = about.getElementsByTagName("point");
-    
+    const summary = about.getElementsByTagName("summary")[0];
+    const points = summary.getElementsByTagName("li");
+
     // Update the DOM with about information
     const aboutSection = document.querySelector('.about');
     const sectionHeader = aboutSection.querySelector('.section-header');
-    
+
     // Clear existing content except the header
     aboutSection.innerHTML = '';
     aboutSection.appendChild(sectionHeader);
-    
-    // If there are specific points, use bullet points
-    if (summaryPoints && summaryPoints.length > 0) {
+
+    // Create a bullet list for the summary points
+    if (points.length > 0) {
         const bulletList = document.createElement('ul');
         bulletList.className = 'about-list';
-        
-        for (let i = 0; i < summaryPoints.length; i++) {
+
+        for (let i = 0; i < points.length; i++) {
             const listItem = document.createElement('li');
-            listItem.textContent = summaryPoints[i].textContent;
+            listItem.textContent = points[i].textContent;
             bulletList.appendChild(listItem);
         }
-        
+
         aboutSection.appendChild(bulletList);
-    } else {
-        // Fallback to using the summary paragraph if no points are defined
-        const summary = about.getElementsByTagName("summary")[0].textContent;
-        const paragraph = document.createElement('p');
-        paragraph.textContent = summary;
-        aboutSection.appendChild(paragraph);
     }
 }
 

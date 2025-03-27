@@ -1,15 +1,4 @@
 :root {
-    --bg-color: #0d1117;
-    --text-color: #c9d1d9;
-    --heading-color: #f0f6fc;
-    --border-color: #30363d;
-    --primary-color: #238636;
-    --secondary-color: #2ea043;
-    --accent-color: #58a6ff;
-    --danger-color: #f85149;
-}
-
-body.light-theme {
     --bg-color: #ffffff;
     --text-color: #24292e;
     --heading-color: #24292e;
@@ -31,7 +20,6 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -40,53 +28,53 @@ body {
     padding: 0 20px;
 }
 
-/* Theme toggle styles */
+/* Remove theme toggle styles */
 .theme-toggle-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-}
-
-.theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: var(--accent-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s;
-}
-
-.theme-toggle:hover {
-    transform: rotate(30deg);
-}
-
-.dark-icon {
     display: none;
 }
 
-.light-icon {
-    display: inline-block;
+.theme-toggle {
+    display: none;
 }
 
-body.light-theme .dark-icon {
-    display: inline-block;
-}
-
-body.light-theme .light-icon {
+/* Remove dark-icon and light-icon styles */
+.dark-icon, .light-icon {
     display: none;
 }
 
 /* Header styles */
 header {
-    padding: 40px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /*padding: 0px 0;*/
     border-bottom: 1px solid var(--border-color);
+}
+
+header.shrink {
+    padding: 10px 0;
+    transition: all 0.3s ease;
+}
+
+header.shrink .profile {
+    gap: 1rem;
+}
+
+header.shrink .profile-image {
+    width: 50px;
+    height: 50px;
+    border-width: 2px;
+}
+
+header.shrink .profile-content h1 {
+    font-size: 1.5rem;
+}
+
+header.shrink .subtitle,
+header.shrink .profile-links {
+    display: none;
 }
 
 /* Profile section */

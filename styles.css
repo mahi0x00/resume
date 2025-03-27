@@ -5,3 +5,7 @@
 .name:hover .last-name {
     visibility: visible;
 }
+
+header {
+    padding: 0;
+}
