@@ -12,11 +12,15 @@
     </personal>
     
     <about>
-        <summary>Dynamic and results-oriented cybersecurity professional with over 10 years of experience in protecting digital products end-to-end.
-I specialise in embedding security throughout the Software Development Lifecycle—from initial threat modeling and secure design, through rigorous penetration testing with tools like Burp Suite, SQLMap, and Nmap, to advanced red team operations utilizing Caldera and OpenBAS.
-My approach seamlessly integrates proactive security automation and continuous monitoring using Anchore, Prometheus, and Grafana, ensuring that vulnerabilities are swiftly identified and mitigated.
-Passionate about creating resilient systems, I excel in aligning robust security practices with industry standards such as PCI-DSS, SOC2, ISO27001, and FedRAMP, and driving secure innovation in DevSecOps environments.
-Let's connect to build secure, future-proof solutions together!</summary>
+        <summary>
+            <ul>
+                <li>Dynamic and results-oriented cybersecurity professional with over 10 years of experience in protecting digital products end-to-end.</li>
+                <li>I specialise in embedding security throughout the Software Development Lifecycle—from initial threat modeling and secure design, through rigorous penetration testing with tools like Burp Suite, SQLMap, and Nmap, to advanced red team operations utilizing Caldera and OpenBAS.</li>
+                <li>My approach seamlessly integrates proactive security automation and continuous monitoring using Anchore, Prometheus, and Grafana, ensuring that vulnerabilities are swiftly identified and mitigated.</li>
+                <li>Passionate about creating resilient systems, I excel in aligning robust security practices with industry standards such as PCI-DSS, SOC2, ISO27001, and FedRAMP, and driving secure innovation in DevSecOps environments.</li>
+                <li>Let's connect to build secure, future-proof solutions together!</li>
+            </ul>
+        </summary>
     </about>
     
     <skills>
@@ -46,7 +50,7 @@ Let's connect to build secure, future-proof solutions together!</summary>
     <experience>
         <job>
             <title>Senior Application Security Engineer</title>
-            <company>Ocrolus Inc.</company>
+            <company>Ocrolus. Inc.</company>
             <location>Gurugram, Haryana, India.</location>
             <logo>img/Ocrolus RGB logo symbol@2x.png</logo>
             <period>Jan 2024 - Present</period>
@@ -65,8 +69,8 @@ Let's connect to build secure, future-proof solutions together!</summary>
             </skills>
         </job>
         <job>
-            <title>Application Security Engineer</title>
-            <company>Lookout Inc</company>
+            <title>Security Intelligence Engineer - Product Security</title>
+            <company>Lookout. Inc.</company>
             <location>Hyderabad, Telangana, India.</location>
             <logo>https://pcwindows.jp.net/wp-content/uploads/2019/05/PC-Lookout-Security-Antivirus-300x300.png</logo>
             <period>Sept' 2014 - Jan 2024</period>

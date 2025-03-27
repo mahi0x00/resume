@@ -149,6 +149,7 @@ header {
     font-size: 1.3rem;
     color: var(--text-color);
     margin-bottom: 15px;
+    font-style: italic;
 }
 
 .profile-links {
@@ -218,24 +219,15 @@ section:last-child {
 }
 
 .about-list {
-    list-style-type: none;
-    padding-left: 0;
+    list-style-type: disc;
+    margin-left: 20px;
+    color: var(--text-color); /* Ensure bullet points are visible */
 }
 
 .about-list li {
-    position: relative;
-    padding-left: 20px;
     margin-bottom: 10px;
     font-size: 1.1rem;
     line-height: 1.5;
-}
-
-.about-list li:before {
-    content: "•";
-    color: var(--accent-color);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
 }
 
 /* Skills section */
@@ -375,6 +367,21 @@ section:last-child {
     background-color: rgba(88, 166, 255, 0.05);
 }
 
+.experience-date-location:before,
+.experience-location:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.experience-date-location:before {
+    content: "\f073"; /* Font Awesome calendar icon */
+}
+
+.experience-location:before {
+    content: "\f3c5"; /* Font Awesome map-marker-alt icon */
+}
+
 /* Projects section */
 .projects-grid {
     display: grid;
@@ -482,6 +489,21 @@ section:last-child {
     color: var(--text-color);
     font-size: 0.85rem;
     font-weight: bold;
+}
+
+.education-date-location:before,
+.education-location:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.education-date-location:before {
+    content: "\f073"; /* Font Awesome calendar icon */
+}
+
+.education-location:before {
+    content: "\f3c5"; /* Font Awesome map-marker-alt icon */
 }
 
 /* Certifications section */
