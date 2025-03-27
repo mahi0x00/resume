@@ -1,8 +1,16 @@
 {
     "tools": [
         {
+            "name": "nmap",
+            "logo": "https://nmap.org/images/nmap-logo-256x256.png"
+        },
+        {
             "name": "Burp Suite",
             "logo": "https://www.opsmx.com/wp-content/uploads/2024/09/Burp-suite-pro-1.svg"
+        },
+        {
+            "name": "OWASP ZAP",
+            "logo": "https://forwardsecurity.com/wp-content/uploads/2023/03/OWASP-ZAP-1.png"
         },
         {
             "name": "OWASP Threat Dragon",

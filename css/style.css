@@ -51,11 +51,13 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 0px 0;
     transition: all 0.5s ease;
+    min-height: 100px; /* Set a consistent minimum height for the header */
 }
 
 header.shrink {
     padding: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100px; /* Ensure the height remains consistent during transition */
 }
 
 header.shrink .profile-links {
@@ -64,8 +66,9 @@ header.shrink .profile-links {
 
 header.shrink .subtitle {
     font-size: 1rem;
-    margin-bottom: 0; /* Remove extra space under the subtitle */
+    margin-bottom: 0; /* Ensure no extra space under the subtitle */
     display: block; /* Ensure the subtitle remains visible */
+    line-height: normal; /* Adjust line height to remove any extra spacing */
 }
 
 /* Profile section */
