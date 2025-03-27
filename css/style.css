@@ -49,16 +49,39 @@ header {
     z-index: 1000;
     background-color: var(--bg-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /*padding: 0px 0;*/
-    border-bottom: 1px solid var(--border-color);
+    padding: 0px 0;
+    transition: all 0.5s ease;
 }
 
 header.shrink {
     padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header.shrink .profile-links {
+    display: none;
+}
+
+header.shrink .subtitle {
+    font-size: 1rem;
+    margin-bottom: 0; /* Remove extra space under the subtitle */
+    display: block; /* Ensure the subtitle remains visible */
+}
+
+/* Profile section */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: visible;
     transition: all 0.3s ease;
 }
 
 header.shrink .profile {
+    flex-direction: row;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -70,21 +93,6 @@ header.shrink .profile-image {
 
 header.shrink .profile-content h1 {
     font-size: 1.5rem;
-}
-
-header.shrink .subtitle,
-header.shrink .profile-links {
-    display: none;
-}
-
-/* Profile section */
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    position: relative;
-    overflow: visible;
 }
 
 .profile-image {
