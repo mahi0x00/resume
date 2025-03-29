@@ -67,6 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add scroll event listener to shrink the header
     const header = document.querySelector('header');
 
+    // Debounce function to limit the rate of function execution
+    function debounce(func, wait) {
+        let timeout;
+        return function (...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    }
+
     function updateHeader() {
         if (window.scrollY > 50) {
             header.classList.add('shrink');
@@ -75,9 +85,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.addEventListener('scroll', () => {
-        requestAnimationFrame(updateHeader);
-    });
+    // Use the debounce function to wrap the updateHeader function
+    window.addEventListener('scroll', debounce(updateHeader, 100));
+
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carouselItems = document.querySelectorAll('.carousel-item');
+
+    let currentIndex = 0;
+
+    const controls = document.createElement('div');
+    controls.classList.add('carousel-controls');
+    document.querySelector('.carousel').appendChild(controls);
+
+    function updateCarousel() {
+        const itemWidth = carouselItems[0].offsetWidth;
+        carouselContainer.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+    }
+
+    // Initialize carousel position
+    updateCarousel();
 });
 
 /**
@@ -95,9 +121,6 @@ function loadResumeData() {
             // Load about section
             loadAboutSection(xmlDoc);
             
-            // Load skills section
-            loadSkillsSection(xmlDoc);
-            
             // Load experience section
             loadExperienceSection(xmlDoc);
             
@@ -110,10 +133,14 @@ function loadResumeData() {
             // Load certifications section
             loadCertificationsSection(xmlDoc);
             
+            // Load tools section
+            loadToolsSection(xmlDoc);
+
+            // Load skills carousel
+            loadSkillsCarousel(xmlDoc);
+
             // Update footer
             updateFooter(xmlDoc);
-
-            loadToolsSection(xmlDoc); // Add this line
         }
     };
     xhr.open("GET", "resumeData.xml", true);
@@ -197,42 +224,6 @@ function loadAboutSection(xmlDoc) {
         }
 
         aboutSection.appendChild(bulletList);
-    }
-}
-
-/**
- * Loads skills section from XML
- */
-function loadSkillsSection(xmlDoc) {
-    const skills = xmlDoc.getElementsByTagName("skills")[0];
-    const categories = skills.getElementsByTagName("category");
-    const skillsContainer = document.querySelector('.skills-container');
-    
-    // Clear existing skills
-    skillsContainer.innerHTML = '';
-    
-    // Add skills from XML
-    for (let i = 0; i < categories.length; i++) {
-        const category = categories[i];
-        const categoryName = category.getAttribute("name");
-        const skillItems = category.getElementsByTagName("skill");
-        
-        const skillCategory = document.createElement('div');
-        skillCategory.className = 'skill-category';
-        
-        const categoryTitle = document.createElement('h3');
-        categoryTitle.textContent = categoryName;
-        skillCategory.appendChild(categoryTitle);
-        
-        const skillsList = document.createElement('ul');
-        for (let j = 0; j < skillItems.length; j++) {
-            const skillItem = document.createElement('li');
-            skillItem.textContent = skillItems[j].textContent;
-            skillsList.appendChild(skillItem);
-        }
-        
-        skillCategory.appendChild(skillsList);
-        skillsContainer.appendChild(skillCategory);
     }
 }
 
@@ -544,6 +535,42 @@ function loadToolsSection(xmlDoc) {
         toolItem.appendChild(toolLogo);
         toolItem.appendChild(toolName);
         toolsContainer.appendChild(toolItem);
+    }
+}
+
+/**
+ * Loads skills carousel from XML
+ */
+function loadSkillsCarousel(xmlDoc) {
+    const skills = xmlDoc.getElementsByTagName("skills")[0];
+    const categories = skills.getElementsByTagName("category");
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    // Clear existing carousel items
+    carouselContainer.innerHTML = '';
+
+    // Add all skills from XML to the carousel
+    for (let i = 0; i < categories.length; i++) {
+        const category = categories[i];
+        const categoryName = category.getAttribute("name");
+        const skillItems = category.getElementsByTagName("skill");
+
+        const skillItem = document.createElement('div');
+        skillItem.className = 'carousel-item';
+
+        const heading = document.createElement('h3');
+        heading.textContent = categoryName;
+        skillItem.appendChild(heading);
+
+        const bulletList = document.createElement('ul');
+        for (let j = 0; j < skillItems.length; j++) {
+            const listItem = document.createElement('li');
+            listItem.textContent = skillItems[j].textContent;
+            bulletList.appendChild(listItem);
+        }
+        skillItem.appendChild(bulletList);
+
+        carouselContainer.appendChild(skillItem);
     }
 }
 

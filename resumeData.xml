@@ -26,26 +26,36 @@
     </about>
     
     <skills>
-        <category name="Security">
+        <category name="Requirements">
+            <skill>Security Requirements Gathering</skill>
+            <skill>Threat Modeling</skill>
+            <skill>Risk Assessment</skill>
+        </category>
+        <category name="Design">
+            <skill>Secure Design Principles</skill>
+            <skill>Security Architecture</skill>
+            <skill>Data Protection Strategies</skill>
+        </category>
+        <category name="Implementation">
+            <skill>Secure Coding Practices</skill>
+            <skill>Static Application Security Testing (SAST)</skill>
+            <skill>Dependency Management</skill>
+        </category>
+        <category name="Verification">
+            <skill>Dynamic Application Security Testing (DAST)</skill>
+            <skill>Interactive Application Security Testing (IAST)</skill>
             <skill>Penetration Testing</skill>
-            <skill>OWASP Top 10</skill>
-            <skill>Secure Code Review</skill>
-            <skill>Vulnerability Assessment</skill>
-            <skill>Security Compliance</skill>
+            <skill>Vulnerability Scanning</skill>
         </category>
-        <category name="Technologies">
-            <skill>Web Application Security</skill>
-            <skill>Network Security</skill>
-            <skill>API Security</skill>
-            <skill>Cloud Security (AWS/Azure)</skill>
-            <skill>Container Security</skill>
+        <category name="Release">
+            <skill>Security Configuration Management</skill>
+            <skill>Compliance Validation</skill>
+            <skill>Secure Deployment Practices</skill>
         </category>
-        <category name="Tools">
-            <skill>Burp Suite</skill>
-            <skill>OWASP ZAP</skill>
-            <skill>Nmap</skill>
-            <skill>Metasploit</skill>
-            <skill>Security Scanners</skill>
+        <category name="Response">
+            <skill>Incident Response Planning</skill>
+            <skill>Monitoring and Logging</skill>
+            <skill>Post-Incident Analysis</skill>
         </category>
     </skills>
     

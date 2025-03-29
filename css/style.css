@@ -1,3 +1,4 @@
+/* General styles */
 :root {
     --bg-color: #ffffff;
     --text-color: #24292e;
@@ -7,6 +8,7 @@
     --secondary-color: #34d058;
     --accent-color: #0366d6;
     --danger-color: #d73a49;
+    --name-font: sans-serif; /* Revert the font for the name */
 }
 
 * {
@@ -16,7 +18,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Revert the global font */
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -26,20 +28,6 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-/* Remove theme toggle styles */
-.theme-toggle-container {
-    display: none;
-}
-
-.theme-toggle {
-    display: none;
-}
-
-/* Remove dark-icon and light-icon styles */
-.dark-icon, .light-icon {
-    display: none;
 }
 
 /* Header styles */
@@ -66,9 +54,9 @@ header.shrink .profile-links {
 
 header.shrink .subtitle {
     font-size: 1rem;
-    margin-bottom: 0; /* Ensure no extra space under the subtitle */
+    margin-bottom: 0; /* Remove extra space under the subtitle */
     display: block; /* Ensure the subtitle remains visible */
-    line-height: normal; /* Adjust line height to remove any extra spacing */
+   
 }
 
 /* Profile section */
@@ -157,7 +145,7 @@ header.shrink .profile-content h1 {
 }
 
 .profile-links a {
-    color: var(--text-color);
+    color: var(--accent-color); /* Updated all buttons to have the same blue as the download button */
     font-size: 1.2rem;
     transition: color 0.3s;
     margin-right: 15px;
@@ -168,7 +156,7 @@ header.shrink .profile-content h1 {
 }
 
 .profile-links a:hover {
-    color: var(--accent-color);
+    color: var(--secondary-color); /* Updated button hover color to green, matching the carousel scrollbar hover color */
 }
 
 .profile-links a[title="Download Resume"] {
@@ -182,34 +170,6 @@ header.shrink .profile-content h1 {
 /* Main content styles */
 main {
     padding: 40px 0;
-}
-
-section {
-    margin-bottom: 40px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-section:last-child {
-    border-bottom: none;
-}
-
-.section-header {
-    margin-bottom: 20px;
-}
-
-.section-header h2 {
-    color: var(--heading-color);
-    font-size: 1.7rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 5px;
-}
-
-.section-header h2 i {
-    color: var(--accent-color);
 }
 
 /* About section */
@@ -229,39 +189,154 @@ section:last-child {
     line-height: 1.5;
 }
 
-/* Skills section */
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.skill-category h3 {
-    color: var(--heading-color);
-    margin-bottom: 12px;
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-.skill-category ul {
-    list-style-type: none;
-}
-
-.skill-category li {
+/* Skills Carousel */
+.carousel {
     position: relative;
-    padding-left: 20px;
-    margin-bottom: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 20px 0;
+    white-space: nowrap;
+    scroll-behavior: smooth;
 }
 
-.skill-category li:before {
-    content: "•";
+.carousel-container {
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+.carousel-item {
+    flex: 0 0 calc(20% - 20px); /* Ensures uniform width for all items */
+    margin: 0 10px; /* Adjust margin to maintain spacing */
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: left; /* Updated text alignment to left for carousel items */
+    background-color: var(--bg-color);
+    border: 0px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.carousel-item p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.carousel-item ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color); /* Use the same blue as icons */
+    border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-color); /* Slightly lighter blue on hover */
+}
+
+/* Add a header for the carousel container */
+.carousel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.carousel-header h2 {
+    font-size: 1.5rem;
+    color: var(--heading-color);
+    margin: 0;
+}
+
+.carousel-header i {
+    font-size: 1.5rem;
     color: var(--accent-color);
+}
+
+/* Education section */
+.education-item {
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+}
+
+.education-logo-container {
+    flex: 0 0 56px;
+    margin-right: 16px;
+}
+
+.institution-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.education-content {
+    flex: 1;
+    position: relative;
+}
+
+.education-title {
+    color: var(--heading-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    padding-right: 200px;
+}
+
+.education-institution {
+    color: var(--heading-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 4px 0;
+    padding-right: 200px;
+}
+
+.education-date-location {
     position: absolute;
-    left: 0;
+    top: 0;
+    right: 0;
+    text-align: right;
+    color: var(--text-color);
+    font-size: 0.85rem;
     font-weight: bold;
 }
 
-/* Experience section - LinkedIn style */
+.education-location {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    text-align: right;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.education-date-location:before,
+.education-location:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.education-date-location:before {
+    content: "\f073"; /* Font Awesome calendar icon */
+}
+
+.education-location:before {
+    content: "\f3c5"; /* Font Awesome map-marker-alt icon */
+}
+
+/* Work Experience section */
 .experience-item {
     margin-bottom: 30px;
     padding: 0;
@@ -381,130 +456,6 @@ section:last-child {
     content: "\f3c5"; /* Font Awesome map-marker-alt icon */
 }
 
-/* Projects section */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-    gap: 20px;
-}
-
-.project-card {
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 20px;
-    transition: transform 0.3s;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-.project-card h3 {
-    color: var(--heading-color);
-    margin-bottom: 10px;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-top: 5px;
-}
-
-.project-card p {
-    margin-bottom: 15px;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.project-tags span {
-    color: var(--heading-color);
-    padding: 3px 10px;
-    border: 1px solid var(--accent-color);
-    border-radius: 15px;
-    font-size: 0.8rem;
-}
-
-/* Education section - LinkedIn style */
-.education-item {
-    margin-bottom: 20px;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    display: flex;
-}
-
-.education-logo-container {
-    flex: 0 0 56px;
-    margin-right: 16px;
-}
-
-.institution-logo {
-    width: 56px;
-    height: 56px;
-    object-fit: contain;
-}
-
-.education-content {
-    flex: 1;
-    position: relative;
-}
-
-.education-title {
-    color: var(--heading-color);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
-    padding: 0;
-    padding-right: 200px;
-}
-
-.education-institution {
-    color: var(--heading-color);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 4px 0;
-    padding-right: 200px;
-}
-
-.education-date-location {
-    position: absolute;
-    top: 0;
-    right: 0;
-    text-align: right;
-    color: var(--text-color);
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-.education-location {
-    position: absolute;
-    top: 20px;
-    right: 0;
-    text-align: right;
-    color: var(--text-color);
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-.education-date-location:before,
-.education-location:before {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    margin-right: 5px;
-}
-
-.education-date-location:before {
-    content: "\f073"; /* Font Awesome calendar icon */
-}
-
-.education-location:before {
-    content: "\f3c5"; /* Font Awesome map-marker-alt icon */
-}
-
 /* Certifications section */
 .certifications-container {
     display: flex;
@@ -562,6 +513,52 @@ section:last-child {
     font-weight: 500;
 }
 
+/* Projects section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card h3 {
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.project-card p {
+    margin-bottom: 15px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-tags span {
+    color: var(--heading-color);
+    padding: 3px 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
 /* Tools section */
 .tools-container {
     display: flex;
@@ -609,10 +606,10 @@ section:last-child {
 
 /* Footer styles */
 footer {
-    border-top: 1px solid var(--border-color);
-    padding: 20px 0;
+    border-top: 0.5px solid var(--border-color);
+    padding: 8px 0;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 /* Responsive styles */
@@ -699,6 +696,19 @@ footer {
 }
 
 .experience-skills span:hover {
-    background-color: rgba(88, 166, 255, 0.15);
+    background-color: rgba(4, 46, 94, 0.15);
     border-color: var(--accent-color);
+}
+
+h2 {
+    color: var(--text-color) !important; /* Updated heading text color to match body text */
+}
+
+h2 i {
+    color: var(--accent-color) !important; /* Updated icon color to match the blue used in skills */
+}
+
+/* Added uniform spacing between containers */
+section {
+    margin-bottom: 2rem;
 }
