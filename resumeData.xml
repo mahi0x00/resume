@@ -14,13 +14,12 @@
     <about>
         <summary>
             <ul>
-                <li>Building security frameworks tailored for scalable applications</li>
-                <li>Designing secure software development workflows that integrate seamlessly with agile teams</li>
-                <li>Finding and fixing vulnerabilities before attackers can exploit them</li>
-                <li>Automating security processes to keep up with fast-paced development cycles</li>
-                <li>Strengthening cloud and container security to ensure resilient deployments</li>
-                <li>Running immersive hackathons and hands-on training to build security-aware teams</li>
-                <li>Crafting advanced red teaming engagements to test organizational resilience</li>
+                <li>11+ years of experience in Application Security, Cloud Security, DevSecOps and Red Teaming.</li>
+                <li>Specialized in embedding security into CI/CD pipelines and automating security processes.</li>
+                <li>Proven expertise in threat modeling, penetration testing, and compliance (PCI-DSS, SOC2, SOC3).</li>
+                <li>Skilled in building AI-driven security tools and dashboards.</li>
+                <li>Strong collaborator with cross-functional teams to enhance the application security posture.</li>
+                <li>Deep experience in cloud security, including automation, monitoring, and compliance.</li>
             </ul>
         </summary>
     </about>
@@ -44,8 +43,8 @@
         <category name="Verification">
             <skill>Dynamic Application Security Testing (DAST)</skill>
             <skill>Interactive Application Security Testing (IAST)</skill>
-            <skill>Penetration Testing</skill>
-            <skill>Vulnerability Scanning</skill>
+            <skill>Vulnerability assessment -Penetration Testing (VAPT)</skill>
+            
         </category>
         <category name="Release">
             <skill>Security Configuration Management</skill>
@@ -67,10 +66,23 @@
             <logo>img/Ocrolus RGB logo symbol@2x.png</logo>
             <period>Jan 2024 - Present</period>
             <responsibilities>
-                <item>Led security assessments for enterprise applications, identifying and mitigating critical vulnerabilities</item>
-                <item>Implemented DevSecOps practices, increasing secure code adoption by 40%</item>
-                <item>Conducted security training for development teams, reducing security incidents by 30%</item>
-                <item>Managed the bug bounty program, triaging and validating security reports</item>
+                <item>Embedded security in SSDLC using Jira, Confluence, GitHub.</item>
+                <item>Led threat modeling with STRIDE, Threat Dragon in Jira.</item>
+                <item>Set secure coding standards; integrated SAST in CI/CD.</item>
+                <item>Enabled secret scanning with GitHub Advanced Security.</item>
+                <item>Managed SCA with Whitesource for open-source, containers.</item>
+                <item>Automated IaC scans for Terraform using Checkov tool.</item>
+                <item>Ran web/API pentests with Burp Suite and Kali tools.</item>
+                <item>Automated compliance checks for PCI, SOC2, SOC3 needs.</item>
+                <item>Enforced AWS security: IAM, KMS, Security Groups, VPC.</item>
+                <item>Automated cloud monitoring with Config, Hub, GuardDuty.</item>
+                <item>Built Lambda for auto-remediation, tagging in AWS cloud.</item>
+                <item>Maintained audit-ready evidence with CloudTrail, S3.</item>
+                <item>Developed Python/Bash scripts for vuln, evidence mgmt.</item>
+                <item>Secured fintech apps, infra, data with AWS automation.</item>
+                <item>Evaluated AI (OpenAI/Gemini) for security workflows.</item>
+                <item>Advised on security best practices for AI adoption.</item>
+                <item>Ran a hackathon for Security Awareness Month.</item>
             </responsibilities>
             <skills>
                 <skill>Application Security</skill>
@@ -87,10 +99,22 @@
             <logo>https://img.securityinfowatch.com/files/base/cygnus/siw/image/2021/02/Lookout_logo.602557221ff2f.png</logo>
             <period>Sept' 2014 - Jan 2024</period>
             <responsibilities>
-                <item>Performed security code reviews and penetration testing for web and mobile applications</item>
-                <item>Developed secure coding guidelines and security requirements for new projects</item>
-                <item>Collaborated with development teams to integrate security into the SDLC</item>
-                <item>Implemented automated security scanning in CI/CD pipelines</item>
+                <item>Collaborated to design secure software solutions.</item>
+                <item>Assessed vulnerabilities in web, API, mobile, and cloud.</item>
+                <item>Enabled shift-left security with Jenkins, Spinnaker, Git.</item>
+                <item>Automated security testing in CI/CD for consistent checks.</item>
+                <item>Enforced security gates before production releases.</item>
+                <item>Managed SAST (Checkmarx) and SCA (Whitesource) in pipelines.</item>
+                <item>Integrated Dependency Track for open-source risk management.</item>
+                <item>Automated vuln management with Nexpose, Lambda, Python.</item>
+                <item>Monitored endpoints (Win, Mac, Linux, Docker) with Uptycs.</item>
+                <item>Built dashboards and alerts for security visibility.</item>
+                <item>Provided rapid vulnerability feedback to developers.</item>
+                <item>Ran monthly ConMon with Nexpose, Uptycs, AWS Config.</item>
+                <item>Stored scan results in S3 and integrated with Splunk.</item>
+                <item>Presented security evidence to stakeholders, auditors.</item>
+                <item>Supported FedRAMP cycles by meeting all requirements.</item>
+                <item>Acted as liaison with 3PAOs during FedRAMP audits.</item>
             </responsibilities>
             <skills>
                 <skill>Penetration Testing</skill>

@@ -275,17 +275,17 @@ function loadExperienceSection(xmlDoc) {
         const contentContainer = document.createElement('div');
         contentContainer.className = 'experience-content';
         
-        // Add title
-        const titleElement = document.createElement('h3');
-        titleElement.className = 'experience-title';
-        titleElement.textContent = title;
-        contentContainer.appendChild(titleElement);
-        
         // Add company
         const companyElement = document.createElement('div');
         companyElement.className = 'experience-company';
         companyElement.textContent = company;
         contentContainer.appendChild(companyElement);
+        
+        // Add title BELOW company
+        const titleElement = document.createElement('h3');
+        titleElement.className = 'experience-title';
+        titleElement.textContent = title;
+        contentContainer.appendChild(titleElement);
         
         // Add date and location
         const dateLocationElement = document.createElement('div');
