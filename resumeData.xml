@@ -62,7 +62,7 @@
         <job>
             <title>Senior Application Security Engineer</title>
             <company>Ocrolus. Inc.</company>
-            <location>Gurugram, Haryana, India.</location>
+            <location>Gurugram, Haryana, India. (Remote)</location>
             <logo>img/Ocrolus RGB logo symbol@2x.png</logo>
             <period>Jan 2024 - Present</period>
             <responsibilities>
@@ -95,7 +95,7 @@
         <job>
             <title>Security Intelligence Engineer - Product Security</title>
             <company>Lookout. Inc.</company>
-            <location>Hyderabad, Telangana, India.</location>
+            <location>Hyderabad, Telangana, India. (Remote)</location>
             <logo>https://img.securityinfowatch.com/files/base/cygnus/siw/image/2021/02/Lookout_logo.602557221ff2f.png</logo>
             <period>Sept' 2014 - Jan 2024</period>
             <responsibilities>
@@ -115,6 +115,32 @@
                 <item>Presented security evidence to stakeholders, auditors.</item>
                 <item>Supported FedRAMP cycles by meeting all requirements.</item>
                 <item>Acted as liaison with 3PAOs during FedRAMP audits.</item>
+            </responsibilities>
+            <skills>
+                <skill>Penetration Testing</skill>
+                <skill>Secure Code Review</skill>
+                <skill>SDLC Integration</skill>
+                <skill>CI/CD Security</skill>
+                <skill>Mobile Security</skill>
+            </skills>
+        </job>
+        <job>
+            <title>Security Analyst</title>
+            <company>CipherCloud. Inc.</company>
+            <location>Hyderabad, Telangana, India.</location>
+            <logo>https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/5fc42471-7cc5-4c64-9c3b-c0ccfee6b14a.png</logo>
+            <period>Sept' 2014 - Jan 2024</period>
+            <responsibilities>
+                <item>Led VAPT engagements and wrote security assessment reports.</item>
+                <item>Performed static code analysis, triaged vulnerabilities, and provided remediation guidance.</item>
+                <item>Identified AWS misconfigurations and implemented encryption and IAM best practices.</item>
+                <item>Conducted network discovery, assessed segmentation, and recommended improvements.</item>
+                <item>Coordinated with internal and external auditors to resolve findings and ensure compliance.</item>
+                <item>Automated vulnerability scanning and reporting for web and cloud assets.</item>
+                <item>Developed custom scripts to streamline security operations and evidence collection.</item>
+                <item>Supported incident response and root cause analysis.</item>
+                <item>Delivered security awareness sessions to engineering and support teams.</item>
+                <item>Maintained up-to-date documentation for security processes and controls.</item>
             </responsibilities>
             <skills>
                 <skill>Penetration Testing</skill>

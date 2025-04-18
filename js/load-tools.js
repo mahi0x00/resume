@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     fetch('tools.json') // Ensure this path is correct relative to your HTML file
         .then(response => {
-            console.log('Fetch response:', response);
+            if (!response.ok) throw new Error('Failed to fetch tools.json');
             return response.json();
         })
         .then(data => {
-            console.log('Tools data:', data);
             const toolsContainer = document.getElementById('tools-container');
             if (!toolsContainer) {
                 console.error('Tools container not found');
                 return;
             }
+            toolsContainer.innerHTML = '';
             data.tools.forEach(tool => {
                 const toolElement = document.createElement('div');
                 toolElement.className = 'tool-item';
@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 toolLogo.src = tool.logo;
                 toolLogo.alt = `${tool.name} logo`;
                 toolLogo.className = 'tool-logo';
-                
-                // Determine if the logo is horizontal or vertical based on aspect ratio
                 toolLogo.onload = () => {
                     if (toolLogo.naturalWidth > toolLogo.naturalHeight) {
                         toolLogo.classList.add('horizontal');
