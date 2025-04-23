@@ -133,8 +133,8 @@ function loadResumeData() {
             // Load certifications section
             loadCertificationsSection(xmlDoc);
             
-            // Load tools section
-            loadToolsSection(xmlDoc);
+            // Remove or comment out the next line to prevent XML-based tools loading
+            // loadToolsSection(xmlDoc);
 
             // Load skills carousel
             loadSkillsCarousel(xmlDoc);
