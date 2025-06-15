@@ -1,6 +1,10 @@
 {
     "tools": [
         {
+            "name": "Giskard",
+            "logo": "https://avatars.githubusercontent.com/u/71782571?s=200&v=4"            
+        },
+        {
             "name": "Nvidia Garak",
             "logo": "https://media.licdn.com/dms/image/v2/D560BAQHPauJ7mdRmjw/company-logo_200_200/company-logo_200_200/0/1690522446573/garakllm_logo?e=1755734400&v=beta&t=i5uG9EwgEx_DfXJtO3VFpqHG1d1ivVsXNGaQ0Z4GswU"            
         },
