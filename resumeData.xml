@@ -14,12 +14,18 @@
     <about>
         <summary>
             <ul>
-                <li>11+ years of experience in Application Security, Cloud Security, DevSecOps and Red Teaming.</li>
-                <li>Specialized in embedding security into CI/CD pipelines and automating security processes.</li>
-                <li>Proven expertise in threat modeling, penetration testing, and compliance (PCI-DSS, SOC2, SOC3).</li>
-                <li>Skilled in building AI-driven security tools and dashboards.</li>
-                <li>Strong collaborator with cross-functional teams to enhance the application security posture.</li>
-                <li>Deep experience in cloud security, including automation, monitoring, and compliance.</li>
+                <li>10+ years of experience in Application Security and SSDLC</li>
+                <li>Expert in DevSecOps, threat modeling, SAST, and SCA</li>
+                <li>Conducted web and API penetration testing in fintech</li>
+                <li>Built Burp Suite extensions using Gemini and ChatGPT</li>
+                <li>Performed LLM red-teaming and prompt injection testing</li>
+                <li>Used Garak’s auto red-team module for LLM scans</li>
+                <li>Applied Giskard for automated LLM vulnerability testing</li>
+                <li>Implemented NeMo Guardrails to enforce LLM safety</li>
+                <li>Automated security workflows with n8n and Langflow</li>
+                <li>Validated LLM inputs/outputs to prevent data leakage</li>
+                <li>Won hackathon for building AI–API interoperability server</li>
+
             </ul>
         </summary>
     </about>
@@ -66,30 +72,25 @@
             <logo>img/Ocrolus RGB logo symbol@2x.png</logo>
             <period>Jan 2024 - Present</period>
             <responsibilities>
-                <item>Embedded security in SSDLC using Jira, Confluence, GitHub.</item>
-                <item>Led threat modeling with STRIDE, Threat Dragon in Jira.</item>
-                <item>Set secure coding standards; integrated SAST in CI/CD.</item>
-                <item>Enabled secret scanning with GitHub Advanced Security.</item>
-                <item>Managed SCA with Whitesource for open-source, containers.</item>
-                <item>Automated IaC scans for Terraform using Checkov tool.</item>
-                <item>Ran web/API pentests with Burp Suite and Kali tools.</item>
-                <item>Automated compliance checks for PCI, SOC2, SOC3 needs.</item>
-                <item>Enforced AWS security: IAM, KMS, Security Groups, VPC.</item>
-                <item>Automated cloud monitoring with Config, Hub, GuardDuty.</item>
-                <item>Built Lambda for auto-remediation, tagging in AWS cloud.</item>
-                <item>Maintained audit-ready evidence with CloudTrail, S3.</item>
-                <item>Developed Python/Bash scripts for vuln, evidence mgmt.</item>
-                <item>Secured fintech apps, infra, data with AWS automation.</item>
-                <item>Evaluated AI (OpenAI/Gemini) for security workflows.</item>
-                <item>Advised on security best practices for AI adoption.</item>
-                <item>Ran a hackathon for Security Awareness Month.</item>
+                <item>Led secure development lifecycle (SSDLC) initiatives including threat modeling, static code analysis (SAST), and software composition analysis (SCA)</item>
+                <item>Performed comprehensive web and API penetration testing on high-risk and high-scale systems</item>
+                <item>Developed custom Burp Suite extensions powered by Gemini and ChatGPT to accelerate pentesting workflows</item>
+                <item>Conducted LLM red-teaming assessments focused on prompt injection, jailbreaks, hallucinations, and data leakage risks</item>
+                <item>Automated LLM vulnerability testing using Giskard’s open-source framework</item>
+                <item>Utilized Garak's auto red-team module to automate LLM vulnerability scanning for issues like prompt injection, hallucinations, and safety bypasses</item>
+                <item>Leveraged NVIDIA Garak’s probes, detectors, and harnesses to scan LLMs for safety issues including toxicity and false reasoning</item>
+                <item>Applied NVIDIA NeMo Guardrails to control and filter unsafe or unauthorized LLM behavior</item>
+                <item>Built internal AI-driven workflow automations using n8n and Langflow to streamline security processes</item>
+                <item>Won company-wide hackathon for building an MCP Server enabling secure AI-to-API interoperability</item>
+                <item>Enforced secure AI practices including input/output sanitization, training data scrubbing, and third-party library validation</item>
+                <item>Collaborated with ML, data, and engineering teams to ensure end-to-end LLM governance and privacy protection</item>
             </responsibilities>
             <skills>
-                <skill>Application Security</skill>
+                <skill>SSDLC</skill>
                 <skill>DevSecOps</skill>
-                <skill>Vulnerability Assessment</skill>
-                <skill>Security Training</skill>
-                <skill>Bug Bounty</skill>
+                <skill>LLM Security</skill>
+                <skill>Workflow Automation</skill>
+                <skill>Web and API Penetration Testing</skill>
             </skills>
         </job>
         <job>
