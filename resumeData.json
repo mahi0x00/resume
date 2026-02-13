@@ -12,8 +12,7 @@
     "profileImage": "https://pbs.twimg.com/profile_images/1868494604322177024/7xeeKUzD_400x400.jpg",
     "email": "mahendhar.kadari+resume@gmail.com",
     "github": "mahi0x00",
-    "linkedin": "mahi0x00",
-    "resumePdf": "#"
+    "linkedin": "mahi0x00"
   },
   "about": [
     "10+ years of experience in Application Security and SSDLC",
@@ -110,7 +109,7 @@
       "title": "Senior Application Security Engineer",
       "company": "Ocrolus. Inc.",
       "location": "Gurugram, Haryana, India. (Remote)",
-      "logo": "img/Ocrolus RGB logo symbol@2x.png",
+      "logo": "img/ocrolus.png",
       "period": "Jan 2024 - Nov 2025",
       "responsibilities": [
         "Led secure development lifecycle (SSDLC) initiatives including threat modeling, static code analysis (SAST), and software composition analysis (SCA)",
@@ -213,7 +212,7 @@
     }
   ],
   "tools": [
-    { "name": "Giskard", "logo": "logo-giskard-stacked light bg.png" },
+    { "name": "Giskard", "logo": "img/giskard.png" },
     { "name": "Nvidia Garak", "logo": "https://pbs.twimg.com/profile_images/1684796654929727489/z69m4Q-G_400x400.jpg" },
     { "name": "nmap", "logo": "https://upload.wikimedia.org/wikipedia/commons/7/73/Logo_nmap.png?20230731104508" },
     { "name": "Burp Suite", "logo": "https://www.opsmx.com/wp-content/uploads/2024/09/Burp-suite-pro-1.svg" },
