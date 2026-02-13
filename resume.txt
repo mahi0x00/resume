@@ -1,5 +1,5 @@
 **Mahendhar Reddy Kadari**\
-Sr. Application Security Engineer | DevSecOps Architect | Red Team Specialist\
+Senior Specialist - Software Engineering | Application Security | AI Security Advocate\
 Hyderabad, Telangana, India\
 +91-9666569659 | [mahendhar.kadari@gmail.com](mailto:mahendhar.kadari@gmail.com)\
 [LinkedIn](https://www.linkedin.com/in/mahi0x00/) | [Portfolio](https://mahi0x00.github.io/resume/)
@@ -30,9 +30,15 @@ Hyderabad, Telangana, India\
 
 ### **Professional Experience**
 
+**AT&T, Hyderabad, India**  
+Senior Specialist - Software Engineering  
+*Feb 2025 – Present*
+
+- Driving software engineering initiatives as a Senior Specialist in the engineering organization.
+
 **Ocrolus Inc., Remote, India**  
 Sr. Application Security Engineer  
-*May 2021 – Present*
+*Jan 2024 – Jan 2025*
 
 - Embedded security in SSDLC using Jira, Confluence, GitHub.
 - Led threat modeling with STRIDE, Threat Dragon in Jira.
