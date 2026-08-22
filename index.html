@@ -5,128 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Mahendhar Reddy Kadari - Senior Specialist, Software Engineering at AT&T."
+      content="Mahendhar Reddy Kadari — Senior Specialist Software Engineering at AT&T. 11+ years in application security, DevSecOps, and LLM security."
     />
-    <title>Resume</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Mahendhar Reddy Kadari · AppSec & AI Security</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <link rel="preload" href="resumeData.json" as="fetch" crossorigin />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header>
-      <div class="container">
-        <div class="profile">
-          <img
-            src=""
-            alt="Profile Picture"
-            class="profile-image"
-          />
-          <div class="profile-content">
+    <!-- ============ NAV ============ -->
+    <nav class="nav" id="nav">
+      <div class="nav-inner">
+        <a href="#home" class="nav-brand mono">~/mahi0x00</a>
+        <div class="nav-links" id="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#tools">Tools</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <header class="hero" id="home">
+      <canvas id="particles-canvas" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <div class="greeting mono">
+          <span class="dot dot-green"></span> Open to security engineering opportunities
+        </div>
+        <div class="hero-grid">
+          <div class="hero-text">
             <h1>
-              <span class="first-name"></span>
-              <span class="last-name"></span>
+              Hi, I'm <span class="highlight">Mahendhar Reddy</span><br />
+              I break systems so attackers can't.
             </h1>
-            <p class="subtitle"></p>
-            <div class="profile-links">
-              <a href="#" title="Email"
-                ><i class="fas fa-envelope"></i
-              ></a>
-              <a
-                href="#"
-                target="_blank"
-                title="GitHub"
-                ><i class="fab fa-github"></i
-              ></a>
-              <a
-                href="#"
-                target="_blank"
-                title="LinkedIn"
-                ><i class="fab fa-linkedin"></i
-              ></a>
-              <a href="#" target="_blank" title="Resume"
-                ><i class="fas fa-file-alt"></i
-              ></a>
+            <p class="hero-sub">
+              Application Security &amp; AI Security Advocate — 11+ years across
+              DevSecOps, threat modeling, pentesting, and LLM red-teaming.
+              Currently Senior Specialist at AT&amp;T.
+            </p>
+            <div class="badge-row">
+              <span class="badge mono"><span class="dot" style="background: var(--accent)"></span> 11+ yrs AppSec</span>
+              <span class="badge mono"><span class="dot" style="background: var(--green)"></span> LLM Red-Teaming</span>
+              <span class="badge mono"><span class="dot" style="background: var(--orange)"></span> DevSecOps · SAST · DAST</span>
             </div>
+            <div class="hero-actions">
+              <a href="#experience" class="btn btn-primary">View experience →</a>
+              <a href="#contact" class="btn btn-outline">Get in touch</a>
+            </div>
+          </div>
+          <div class="hero-avatar">
+            <img src="" alt="" id="profile-image" />
           </div>
         </div>
       </div>
     </header>
 
-    <main class="container">
-      <section class="about">
-        <div class="section-header">
-          <h2><i class="fas fa-user"></i> About Me</h2>
+    <main>
+      <!-- ============ ABOUT ============ -->
+      <section id="about" class="section section-alt reveal">
+        <div class="container">
+          <div class="section-label mono">About</div>
+          <h2 class="section-title">Security engineer, builder of guardrails</h2>
+          <div class="about-grid">
+            <div class="about-text" id="about-list"></div>
+            <div class="about-stats">
+              <div class="stat-card">
+                <div class="num gradient-text" data-target="11">0</div>
+                <div class="label">Years in security</div>
+              </div>
+              <div class="stat-card">
+                <div class="num gradient-text" data-target="4">0</div>
+                <div class="label">Companies secured</div>
+              </div>
+              <div class="stat-card">
+                <div class="num gradient-text" data-target="23">0</div>
+                <div class="label">Tools in arsenal</div>
+              </div>
+              <div class="stat-card">
+                <div class="num gradient-text" data-target="1">0</div>
+                <div class="label">Hackathon won (MCP server)</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <section class="carousel">
-        <div class="carousel-header">
-          <i class="fas fa-tools"></i>
-          <h2>Skills</h2>
-        </div>
-        <div class="carousel-container"></div>
-      </section>
-      <section class="education">
-        <div class="section-header">
-          <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-        </div>
-        <!-- Education items loaded dynamically from resumeData.json -->
-      </section>
-      <section class="experience">
-        <div class="section-header">
-          <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+
+      <!-- ============ SKILLS ============ -->
+      <section id="skills" class="section reveal">
+        <div class="container">
+          <div class="section-label mono">Toolbox</div>
+          <h2 class="section-title">Across the SSDLC</h2>
+          <div class="skills-grid" id="skills-grid"></div>
         </div>
       </section>
-      <section class="certifications">
-        <div class="section-header">
-          <h2><i class="fas fa-certificate"></i> Certifications</h2>
-        </div>
-        <div class="certifications-container"></div>
-        <!-- Credly badges loaded dynamically from resumeData.json -->
-      </section>
-      <section class="projects">
-        <div class="section-header">
-          <h2><i class="fas fa-project-diagram"></i> Projects</h2>
-        </div>
-        <div class="projects-grid">
-          <!-- Project cards loaded dynamically from resumeData.json -->
+
+      <!-- ============ EXPERIENCE ============ -->
+      <section id="experience" class="section section-alt reveal">
+        <div class="container">
+          <div class="section-label mono">Career</div>
+          <h2 class="section-title">Where I've shipped</h2>
+          <div class="timeline" id="timeline"></div>
         </div>
       </section>
-      <section class="tools">
-        <div class="section-header">
-          <h2><i class="fas fa-tools"></i> Tools</h2>
+
+      <!-- ============ PROJECTS ============ -->
+      <section id="projects" class="section reveal">
+        <div class="container">
+          <div class="section-label mono">Projects</div>
+          <h2 class="section-title">Selected work</h2>
+          <div class="projects-grid" id="projects-grid"></div>
         </div>
-        <div id="tools-container" class="tools-container">
-          <!-- Tools loaded dynamically from resumeData.json -->
-          <div id="tools-loading" style="text-align: center; padding: 1em">
-            Loading tools...
+      </section>
+
+      <!-- ============ EDUCATION + CERTS ============ -->
+      <section id="education" class="section section-alt reveal">
+        <div class="container">
+          <div class="section-label mono">Credentials</div>
+          <h2 class="section-title">Education &amp; certifications</h2>
+          <div class="edu-grid" id="education-list"></div>
+          <div class="certs-row" id="certs-container"></div>
+          <div class="credly-row" id="credly-badges"></div>
+        </div>
+      </section>
+
+      <!-- ============ TOOLS ============ -->
+      <section id="tools" class="section reveal">
+        <div class="container">
+          <div class="section-label mono">Arsenal</div>
+          <h2 class="section-title">Tools I reach for</h2>
+          <div class="tools-grid" id="tools-container"></div>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section id="contact" class="section section-alt reveal">
+        <div class="container">
+          <div class="cta-box">
+            <h2>Let's make something harder to break<span class="highlight">.</span></h2>
+            <p>
+              Open to senior AppSec / AI-security roles and selective consulting.
+              Fastest way to reach me is email or LinkedIn.
+            </p>
+            <div class="contact-links" id="contact-links"></div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>
-          &copy; <span id="current-year"></span> . All
-          rights reserved.
-        </p>
-        <p>Last Updated: <span id="last-updated"></span></p>
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p><span class="mono highlight">mahi0x00</span> · Built with plain HTML/CSS/JS — view source friendly.</p>
+        <p class="mono dim">&copy; <span id="current-year"></span> · Updated <span id="last-updated"></span></p>
       </div>
     </footer>
 
-    <!-- Add html2pdf.js library -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <!-- Add PDF generator script -->
-    <script src="js/pdf-generator.js"></script>
-    <!-- Single script — loads all data from resumeData.json -->
     <script src="js/script.js"></script>
   </body>
 </html>

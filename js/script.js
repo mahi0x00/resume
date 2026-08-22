@@ -1,528 +1,376 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Load resume data from the single source of truth JSON
-    loadResumeData();
+/**
+ * Portfolio renderer — loads everything from resumeData.json (single source of truth).
+ */
+(function () {
+  "use strict";
 
-    // Update current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+  const ICONS = {
+    email:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5.03L4 8.24V6.5l8 5.03 8-5.03v1.74z"/></svg>',
+    github:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.49 5.92.43.38.82 1.11.82 2.24v3.32c0 .32.21.7.82.58A12 12 0 0 0 12 .3z"/></svg>',
+    linkedin:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>',
+    folder:
+      '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+  };
 
-    // Update last updated date in footer
-    const lastUpdated = new Date(document.lastModified);
-    document.getElementById('last-updated').textContent = lastUpdated.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+  function el(tag, cls, html) {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (html !== undefined) node.innerHTML = html;
+    return node;
+  }
+
+  function skillTag(name) {
+    return `<span class="skill-tag">${name}</span>`;
+  }
+
+  fetch("resumeData.json")
+    .then((r) => {
+      if (!r.ok) throw new Error("Failed to load resumeData.json");
+      return r.json();
+    })
+    .then((data) => {
+      document.title = data.meta.pageTitle || document.title;
+
+      /* ---- Meta description ---- */
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc && data.meta.pageDescription) desc.content = data.meta.pageDescription;
+
+      /* ---- Hero / personal ---- */
+      const p = data.personal;
+      const profileImg = document.getElementById("profile-image");
+      if (profileImg) {
+        profileImg.src = p.profileImage;
+        profileImg.alt = p.name;
+      }
+
+      /* ---- About ---- */
+      const aboutList = document.getElementById("about-list");
+      if (aboutList) {
+        aboutList.className = "about-list";
+        aboutList.innerHTML = data.about
+          .map((line) => `<div class="about-item"><span>${line}</span></div>`)
+          .join("");
+      }
+
+      /* ---- Skills ---- */
+      const skillsGrid = document.getElementById("skills-grid");
+      if (skillsGrid) {
+        skillsGrid.innerHTML = data.skills
+          .map(
+            (cat) => `
+            <div class="skill-card">
+              <h3>${cat.category}</h3>
+              <div class="skill-tags">
+                ${cat.items.map(skillTag).join("")}
+              </div>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Experience timeline ---- */
+      const timeline = document.getElementById("timeline");
+      if (timeline) {
+        timeline.innerHTML = data.experience
+          .map((job, i) => {
+            const logo = job.logo
+              ? `<img class="tl-logo" src="${job.logo}" alt="${job.company} logo" loading="lazy" />`
+              : "";
+            return `
+            <div class="tl-item${i === 0 ? " current" : ""}">
+              <span class="tl-dot"></span>
+              <div class="tl-period">${job.period}</div>
+              <div class="tl-head">
+                ${logo}
+                <div>
+                  <div class="tl-title">${job.title}</div>
+                  <div class="tl-company">${job.company} · ${job.location}</div>
+                </div>
+              </div>
+              <ul class="resp-list">
+                ${job.responsibilities.map((r) => `<li>${r}</li>`).join("")}
+              </ul>
+              <div class="tl-tags">${(job.skills || []).map(skillTag).join("")}</div>
+            </div>`;
+          })
+          .join("");
+      }
+
+      /* ---- Projects ---- */
+      const projectsGrid = document.getElementById("projects-grid");
+      if (projectsGrid) {
+        projectsGrid.innerHTML = data.projects
+          .map(
+            (prj) => `
+            <div class="project-card">
+              <div class="project-folder">${ICONS.folder}</div>
+              <h3>${prj.title}</h3>
+              <p>${prj.description}</p>
+              <div class="project-tags">${prj.tags.map((t) => `<span>${t}</span>`).join("")}</div>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Education ---- */
+      const eduList = document.getElementById("education-list");
+      if (eduList) {
+        eduList.innerHTML = data.education
+          .map(
+            (ed) => `
+            <div class="edu-card">
+              <img class="edu-logo" src="${ed.logo}" alt="${ed.institution}" loading="lazy" />
+              <div class="edu-info">
+                <h3>${ed.title}</h3>
+                <p>${ed.institution} · ${ed.location}</p>
+                <div class="edu-period">${ed.period}</div>
+              </div>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Certifications + Credly badges ---- */
+      const certs = document.getElementById("certs-container");
+      if (certs) {
+        certs.innerHTML = data.certifications
+          .map(
+            (cert) => `
+            <div class="cert-chip">
+              <img src="${cert.logo}" alt="${cert.title}" loading="lazy" />
+              <div>
+                <div class="t">${cert.title}</div>
+                <div class="y">${cert.year}</div>
+              </div>
+            </div>`
+          )
+          .join("");
+      }
+      const credly = document.getElementById("credly-badges");
+      if (credly && (data.credlyBadges || []).length) {
+        /* Official Credly embed — renders real badge artwork via their embed script */
+        data.credlyBadges.forEach((id) => {
+          const badge = document.createElement("div");
+          badge.style.display = "inline-block";
+          badge.setAttribute("data-iframe-width", "150");
+          badge.setAttribute("data-iframe-height", "270");
+          badge.setAttribute("data-share-badge-id", id);
+          badge.setAttribute("data-share-badge-host", "https://www.credly.com");
+          credly.appendChild(badge);
+        });
+        const s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://cdn.credly.com/assets/utilities/embed.js";
+        document.body.appendChild(s);
+      }
+
+      /* ---- Tools ---- */
+      const tools = document.getElementById("tools-container");
+      if (tools) {
+        tools.innerHTML = data.tools
+          .map(
+            (tool) => `
+            <div class="tool-tile">
+              <img src="${tool.logo}" alt="${tool.name}" loading="lazy"
+                   onerror="this.onerror=null;this.style.visibility='hidden';" />
+              <span>${tool.name}</span>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Contact links ---- */
+      const links = document.getElementById("contact-links");
+      if (links) {
+        const items = [
+          { href: `mailto:${p.email}`, icon: ICONS.email, label: "Email" },
+          { href: `https://github.com/${p.github}`, icon: ICONS.github, label: `github/${p.github}` },
+          { href: `https://linkedin.com/in/${p.linkedin}`, icon: ICONS.linkedin, label: `linkedin/${p.linkedin}` },
+        ];
+        links.innerHTML = items
+          .map((it) => `<a class="contact-link" href="${it.href}" target="_blank" rel="noopener">${it.icon}${it.label}</a>`)
+          .join("");
+      }
+
+      /* ---- Footer ---- */
+      const yearEl = document.getElementById("current-year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+      const upd = document.getElementById("last-updated");
+      if (upd) upd.textContent = data.meta.lastUpdated || "";
+
+      initReveal();
+      initCounters();
+    })
+    .catch((err) => console.error("[portfolio]", err));
+
+  /* ---- Scroll reveal ---- */
+  function initReveal() {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll(".reveal").forEach((n) => obs.observe(n));
+  }
+
+  /* ---- Animated counters ---- */
+  function initCounters() {
+    const nums = document.querySelectorAll(".stat-card .num[data-target]");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const node = e.target;
+          const target = parseInt(node.dataset.target, 10);
+          const dur = 1100;
+          const t0 = performance.now();
+          (function tick(t) {
+            const k = Math.min((t - t0) / dur, 1);
+            node.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+            if (k < 1) requestAnimationFrame(tick);
+          })(t0);
+          obs.unobserve(node);
+        });
+      },
+      { threshold: 0.4 }
+    );
+    nums.forEach((n) => obs.observe(n));
+  }
+})();
+
+/* ============================================================
+   Nav behaviour (scroll state, mobile drawer, active link)
+   ============================================================ */
+(function () {
+  "use strict";
+
+  const nav = document.getElementById("nav");
+  const burger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+
+  window.addEventListener("scroll", () => {
+    nav.classList.toggle("scrolled", window.scrollY > 10);
+  }, { passive: true });
+
+  if (burger && navLinks) {
+    burger.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      burger.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("nav-open", open);
     });
 
-    // Smooth scrolling for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 70,
-                    behavior: 'smooth'
-                });
-            }
-        });
+    navLinks.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        navLinks.classList.remove("open");
+        burger.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+      }
     });
+  }
 
-    // Add hover effect to project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.borderColor = '#58a6ff';
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.borderColor = '';
-        });
-    });
-
-    // Typewriter effect for last name
-    const lastNameElement = document.querySelector('.profile-content h1 .last-name');
-    const lastName = lastNameElement.textContent;
-    lastNameElement.textContent = '';
-
-    function typeWriter(text, element, delay = 50) {
-        let index = 0;
-        element.textContent = '';
-        function type() {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                setTimeout(type, delay);
-            }
+  /* Active section highlighting */
+  const sections = document.querySelectorAll("main section[id], header[id]");
+  const linkMap = new Map();
+  document.querySelectorAll(".nav-links a").forEach((a) => {
+    linkMap.set(a.getAttribute("href").slice(1), a);
+  });
+  const secObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        const link = linkMap.get(e.target.id);
+        if (!link) return;
+        if (e.isIntersecting) {
+          linkMap.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
         }
-        type();
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  sections.forEach((s) => secObs.observe(s));
+})();
+
+/* ============================================================
+   Particle network hero background (desktop only)
+   ============================================================ */
+(function () {
+  "use strict";
+
+  const canvas = document.getElementById("particles-canvas");
+  if (!canvas) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+  let raf;
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const LINK_DIST = 130;
+  const MAX_PARTICLES = 70;
+
+  function resize() {
+    const hero = canvas.parentElement;
+    canvas.width = hero.offsetWidth * DPR;
+    canvas.height = hero.offsetHeight * DPR;
+    canvas.style.width = hero.offsetWidth + "px";
+    canvas.style.height = hero.offsetHeight + "px";
+    const count = Math.min(MAX_PARTICLES, Math.floor((canvas.width * canvas.height) / 26000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35 * DPR,
+      vy: (Math.random() - 0.5) * 0.35 * DPR,
+      r: (Math.random() * 1.4 + 0.6) * DPR,
+    }));
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(56, 189, 248, 0.45)";
+      ctx.fill();
     }
-
-    document.querySelector('.profile-content h1').addEventListener('mouseenter', () => {
-        lastNameElement.style.visibility = 'visible';
-        typeWriter(lastName, lastNameElement);
-    });
-
-    // Add scroll event listener to shrink the header
-    const header = document.querySelector('header');
-
-    function debounce(func, wait) {
-        let timeout;
-        return function (...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), wait);
-        };
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < LINK_DIST * DPR) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle =
+            "rgba(129, 140, 248," + (0.14 * (1 - dist / (LINK_DIST * DPR))).toFixed(3) + ")";
+          ctx.lineWidth = DPR * 0.6;
+          ctx.stroke();
+        }
+      }
     }
-
-    function updateHeader() {
-        if (window.scrollY > 50) {
-            header.classList.add('shrink');
-        } else {
-            header.classList.remove('shrink');
-        }
-    }
-
-    window.addEventListener('scroll', debounce(updateHeader, 100));
-
-    const carouselContainer = document.querySelector('.carousel-container');
-    const carouselItems = document.querySelectorAll('.carousel-item');
-
-    let currentIndex = 0;
-
-    const controls = document.createElement('div');
-    controls.classList.add('carousel-controls');
-    document.querySelector('.carousel').appendChild(controls);
-
-    function updateCarousel() {
-        if (carouselItems.length > 0) {
-            const itemWidth = carouselItems[0].offsetWidth;
-            carouselContainer.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-        }
-    }
-
-    updateCarousel();
-});
-
-/**
- * Loads all resume data from the single source of truth: resumeData.json
- */
-function loadResumeData() {
-    fetch('resumeData.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Failed to load resumeData.json');
-            return response.json();
-        })
-        .then(data => {
-            // Update page metadata
-            if (data.meta) {
-                document.title = data.meta.pageTitle || document.title;
-                const metaDesc = document.querySelector('meta[name="description"]');
-                if (metaDesc && data.meta.pageDescription) {
-                    metaDesc.setAttribute('content', data.meta.pageDescription);
-                }
-                if (data.meta.lastUpdated) {
-                    const lastUpdatedEl = document.getElementById('last-updated');
-                    if (lastUpdatedEl) {
-                        const d = new Date(data.meta.lastUpdated + 'T00:00:00');
-                        lastUpdatedEl.textContent = d.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                        });
-                    }
-                }
-            }
-
-            // Load all sections
-            loadPersonalInfo(data.personal);
-            loadAboutSection(data.about);
-            loadSkillsCarousel(data.skills);
-            loadEducationSection(data.education);
-            loadExperienceSection(data.experience);
-            loadCertificationsSection(data.certifications, data.credlyBadges);
-            loadProjectsSection(data.projects);
-            loadToolsSection(data.tools);
-            updateFooter(data.personal);
-        })
-        .catch(error => {
-            console.error('Error loading resume data:', error);
-        });
-}
-
-/**
- * Loads personal information from JSON
- */
-function loadPersonalInfo(personal) {
-    if (!personal) return;
-
-    document.querySelector('.profile-content h1 .first-name').textContent = personal.firstName;
-    document.querySelector('.profile-content h1 .last-name').textContent = personal.lastName;
-    document.querySelector('.profile-content .subtitle').textContent = personal.title;
-    document.querySelector('.profile-image').src = personal.profileImage;
-    document.querySelector('.profile-links a[title="Email"]').href = `mailto:${personal.email}`;
-    document.querySelector('.profile-links a[title="GitHub"]').href = `https://github.com/${personal.github}`;
-    document.querySelector('.profile-links a[title="LinkedIn"]').href = `https://linkedin.com/in/${personal.linkedin}`;
-    document.querySelector('.profile-links a[title="Resume"]').href = personal.resumePdf;
-
-    // Add download button
-    const profileLinks = document.querySelector('.profile-links');
-    const downloadLink = document.createElement('a');
-    downloadLink.href = '#';
-    downloadLink.setAttribute('title', 'Download Resume');
-
-    const downloadIcon = document.createElement('i');
-    downloadIcon.className = 'fas fa-download';
-    downloadLink.appendChild(downloadIcon);
-
-    downloadLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (typeof generateResumePDF === 'function') {
-            generateResumePDF();
-        } else {
-            console.error('PDF generator function not available');
-            window.location.href = personal.resumePdf;
-        }
-    });
-
-    profileLinks.appendChild(downloadLink);
-}
-
-/**
- * Loads about section from JSON
- */
-function loadAboutSection(aboutItems) {
-    if (!aboutItems || !aboutItems.length) return;
-
-    const aboutSection = document.querySelector('.about');
-    const sectionHeader = aboutSection.querySelector('.section-header');
-
-    aboutSection.innerHTML = '';
-    aboutSection.appendChild(sectionHeader);
-
-    const bulletList = document.createElement('ul');
-    bulletList.className = 'about-list';
-
-    aboutItems.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.textContent = item;
-        bulletList.appendChild(listItem);
-    });
-
-    aboutSection.appendChild(bulletList);
-}
-
-/**
- * Loads skills carousel from JSON
- */
-function loadSkillsCarousel(skills) {
-    if (!skills || !skills.length) return;
-
-    const carouselContainer = document.querySelector('.carousel-container');
-    carouselContainer.innerHTML = '';
-
-    skills.forEach(skill => {
-        const skillItem = document.createElement('div');
-        skillItem.className = 'carousel-item';
-
-        const heading = document.createElement('h3');
-        heading.textContent = skill.category;
-        skillItem.appendChild(heading);
-
-        const bulletList = document.createElement('ul');
-        skill.items.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.textContent = item;
-            bulletList.appendChild(listItem);
-        });
-        skillItem.appendChild(bulletList);
-
-        carouselContainer.appendChild(skillItem);
-    });
-}
-
-/**
- * Loads education section from JSON
- */
-function loadEducationSection(education) {
-    if (!education || !education.length) return;
-
-    const educationSection = document.querySelector('section.education');
-    const sectionHeader = educationSection.querySelector('.section-header');
-    educationSection.innerHTML = '';
-    educationSection.appendChild(sectionHeader);
-
-    education.forEach(degree => {
-        const eduItem = document.createElement('div');
-        eduItem.className = 'education-item';
-
-        // Logo container
-        const logoContainer = document.createElement('div');
-        logoContainer.className = 'education-logo-container';
-
-        if (degree.logo) {
-            const logoImg = document.createElement('img');
-            logoImg.src = degree.logo;
-            logoImg.alt = degree.institution + ' logo';
-            logoImg.title = degree.institution;
-            logoImg.className = 'institution-logo';
-            logoContainer.appendChild(logoImg);
-        }
-
-        eduItem.appendChild(logoContainer);
-
-        // Content container
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'education-content';
-
-        const titleElement = document.createElement('h3');
-        titleElement.className = 'education-title';
-        titleElement.textContent = degree.title;
-        contentContainer.appendChild(titleElement);
-
-        const institutionElement = document.createElement('div');
-        institutionElement.className = 'education-institution';
-        institutionElement.textContent = degree.institution;
-        contentContainer.appendChild(institutionElement);
-
-        const dateLocationElement = document.createElement('div');
-        dateLocationElement.className = 'education-date-location';
-        dateLocationElement.textContent = degree.period;
-        contentContainer.appendChild(dateLocationElement);
-
-        if (degree.location) {
-            const locationElement = document.createElement('div');
-            locationElement.className = 'education-location';
-            locationElement.textContent = degree.location;
-            contentContainer.appendChild(locationElement);
-        }
-
-        eduItem.appendChild(contentContainer);
-        educationSection.appendChild(eduItem);
-    });
-}
-
-/**
- * Loads experience section from JSON
- */
-function loadExperienceSection(experience) {
-    if (!experience || !experience.length) return;
-
-    const experienceSection = document.querySelector('section.experience');
-    const sectionHeader = experienceSection.querySelector('.section-header');
-    experienceSection.innerHTML = '';
-    experienceSection.appendChild(sectionHeader);
-
-    experience.forEach(job => {
-        const jobElement = document.createElement('div');
-        jobElement.className = 'experience-item';
-
-        // Logo container
-        const logoContainer = document.createElement('div');
-        logoContainer.className = 'experience-logo-container';
-
-        if (job.logo) {
-            const logoImg = document.createElement('img');
-            logoImg.src = job.logo;
-            logoImg.alt = job.company + ' logo';
-            logoImg.title = job.company;
-            logoImg.className = 'company-logo';
-            logoContainer.appendChild(logoImg);
-        }
-
-        jobElement.appendChild(logoContainer);
-
-        // Content container
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'experience-content';
-
-        const companyElement = document.createElement('div');
-        companyElement.className = 'experience-company';
-        companyElement.textContent = job.company;
-        contentContainer.appendChild(companyElement);
-
-        const titleElement = document.createElement('h3');
-        titleElement.className = 'experience-title';
-        titleElement.textContent = job.title;
-        contentContainer.appendChild(titleElement);
-
-        const dateLocationElement = document.createElement('div');
-        dateLocationElement.className = 'experience-date-location';
-        dateLocationElement.textContent = job.period;
-        contentContainer.appendChild(dateLocationElement);
-
-        if (job.location) {
-            const locationElement = document.createElement('div');
-            locationElement.className = 'experience-location';
-            locationElement.textContent = job.location;
-            contentContainer.appendChild(locationElement);
-        }
-
-        // Responsibilities
-        if (job.responsibilities && job.responsibilities.length > 0) {
-            const respList = document.createElement('ul');
-            job.responsibilities.forEach(resp => {
-                const respItem = document.createElement('li');
-                respItem.textContent = resp;
-                respList.appendChild(respItem);
-            });
-            contentContainer.appendChild(respList);
-        }
-
-        // Skills tags
-        if (job.skills && job.skills.length > 0) {
-            const skillsContainer = document.createElement('div');
-            skillsContainer.className = 'experience-skills';
-
-            job.skills.forEach(skill => {
-                const skillSpan = document.createElement('span');
-                skillSpan.textContent = skill;
-                skillsContainer.appendChild(skillSpan);
-            });
-
-            contentContainer.appendChild(skillsContainer);
-        }
-
-        jobElement.appendChild(contentContainer);
-        experienceSection.appendChild(jobElement);
-    });
-}
-
-/**
- * Loads certifications section from JSON
- */
-function loadCertificationsSection(certifications, credlyBadges) {
-    if (!certifications) return;
-
-    const certsContainer = document.querySelector('.certifications-container');
-    certsContainer.innerHTML = '';
-
-    certifications.forEach(cert => {
-        const certItem = document.createElement('div');
-        certItem.className = 'certification-item';
-
-        // Logo container
-        const logoContainer = document.createElement('div');
-        logoContainer.className = 'certification-logo-container';
-
-        if (cert.logo) {
-            const logoImg = document.createElement('img');
-            logoImg.src = cert.logo;
-            logoImg.alt = cert.title + ' logo';
-            logoImg.title = cert.title;
-            logoImg.className = 'certification-logo';
-            logoContainer.appendChild(logoImg);
-        }
-
-        certItem.appendChild(logoContainer);
-
-        // Content container
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'certification-content';
-
-        const certTitle = document.createElement('h3');
-        certTitle.textContent = cert.title;
-        contentContainer.appendChild(certTitle);
-
-        const certYear = document.createElement('span');
-        certYear.className = 'certification-date';
-        certYear.textContent = cert.year;
-        contentContainer.appendChild(certYear);
-
-        certItem.appendChild(contentContainer);
-        certsContainer.appendChild(certItem);
-    });
-
-    // Load Credly badges dynamically from JSON
-    if (credlyBadges && credlyBadges.length > 0) {
-        const certsSection = document.querySelector('section.certifications');
-        credlyBadges.forEach(badgeId => {
-            const badgeDiv = document.createElement('div');
-            badgeDiv.setAttribute('data-iframe-width', '150');
-            badgeDiv.setAttribute('data-iframe-height', '270');
-            badgeDiv.setAttribute('data-share-badge-id', badgeId);
-            badgeDiv.setAttribute('data-share-badge-host', 'https://www.credly.com');
-            certsSection.appendChild(badgeDiv);
-        });
-
-        // Load the Credly embed script
-        const credlyScript = document.createElement('script');
-        credlyScript.type = 'text/javascript';
-        credlyScript.async = true;
-        credlyScript.src = '//cdn.credly.com/assets/utilities/embed.js';
-        certsSection.appendChild(credlyScript);
-    }
-}
-
-/**
- * Loads projects section from JSON
- */
-function loadProjectsSection(projects) {
-    if (!projects || !projects.length) return;
-
-    const projectsGrid = document.querySelector('.projects-grid');
-    projectsGrid.innerHTML = '';
-
-    projects.forEach(project => {
-        const projectCard = document.createElement('div');
-        projectCard.className = 'project-card';
-
-        const projectTitle = document.createElement('h3');
-        projectTitle.textContent = project.title;
-        projectCard.appendChild(projectTitle);
-
-        const projectDesc = document.createElement('p');
-        projectDesc.textContent = project.description;
-        projectCard.appendChild(projectDesc);
-
-        const projectTags = document.createElement('div');
-        projectTags.className = 'project-tags';
-
-        project.tags.forEach(tag => {
-            const tagSpan = document.createElement('span');
-            tagSpan.textContent = tag;
-            projectTags.appendChild(tagSpan);
-        });
-
-        projectCard.appendChild(projectTags);
-        projectsGrid.appendChild(projectCard);
-    });
-}
-
-/**
- * Loads tools section from JSON
- */
-function loadToolsSection(tools) {
-    if (!tools || !tools.length) return;
-
-    const toolsContainer = document.getElementById('tools-container');
-    if (!toolsContainer) return;
-
-    toolsContainer.innerHTML = '';
-
-    tools.forEach(tool => {
-        const toolElement = document.createElement('div');
-        toolElement.className = 'tool-item';
-
-        const toolLogo = document.createElement('img');
-        toolLogo.src = tool.logo;
-        toolLogo.alt = `${tool.name} logo`;
-        toolLogo.title = tool.name;
-        toolLogo.className = 'tool-logo';
-
-        toolElement.appendChild(toolLogo);
-        toolsContainer.appendChild(toolElement);
-    });
-}
-
-/**
- * Updates footer with name from JSON
- */
-function updateFooter(personal) {
-    if (!personal) return;
-
-    const name = personal.name || `${personal.firstName} ${personal.lastName}`.trim();
-    const footerText = document.querySelector('footer p');
-    footerText.innerHTML = `&copy; <span id="current-year">${new Date().getFullYear()}</span> ${name}. All rights reserved.`;
-}
+    raf = requestAnimationFrame(step);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else raf = requestAnimationFrame(step);
+  });
+  step();
+})();
