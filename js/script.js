@@ -168,16 +168,29 @@
         document.body.appendChild(s);
       }
 
-      /* ---- Tools ---- */
+      /* ---- Tools (grouped arsenal) ---- */
       const tools = document.getElementById("tools-container");
       if (tools) {
-        tools.innerHTML = data.tools
+        const groups = data.toolGroups || [
+          { category: "", items: data.tools }
+        ];
+        tools.innerHTML = groups
           .map(
-            (tool) => `
-            <div class="tool-tile">
-              <img src="${tool.logo}" alt="${tool.name}" loading="lazy"
-                   onerror="this.onerror=null;this.style.visibility='hidden';" />
-              <span>${tool.name}</span>
+            (g) => `
+            <div class="tools-group">
+              ${g.category ? `<h3 class="tools-cat mono">${g.category}</h3>` : ""}
+              <div class="tools-grid">
+                ${g.items
+                  .map(
+                    (tool) => `
+                  <div class="tool-tile">
+                    <div class="tool-logo"><img src="${tool.logo}" alt="${tool.name}" loading="lazy"
+                         onerror="this.onerror=null;this.style.visibility='hidden';" /></div>
+                    <span>${tool.name}</span>
+                  </div>`
+                  )
+                  .join("")}
+              </div>
             </div>`
           )
           .join("");
@@ -187,12 +200,12 @@
       const links = document.getElementById("contact-links");
       if (links) {
         const items = [
-          { href: `mailto:${p.email}`, icon: ICONS.email, label: "Email" },
-          { href: `https://github.com/${p.github}`, icon: ICONS.github, label: `github/${p.github}` },
-          { href: `https://linkedin.com/in/${p.linkedin}`, icon: ICONS.linkedin, label: `linkedin/${p.linkedin}` },
+          { href: `mailto:${p.email}`, icon: ICONS.email, label: "Email me", cls: "contact-link primary" },
+          { href: `https://github.com/${p.github}`, icon: ICONS.github, label: `github/${p.github}`, cls: "contact-link" },
+          { href: `https://linkedin.com/in/${p.linkedin}`, icon: ICONS.linkedin, label: `linkedin/${p.linkedin}`, cls: "contact-link" },
         ];
         links.innerHTML = items
-          .map((it) => `<a class="contact-link" href="${it.href}" target="_blank" rel="noopener">${it.icon}${it.label}</a>`)
+          .map((it) => `<a class="${it.cls}" href="${it.href}" target="_blank" rel="noopener">${it.icon}${it.label}</a>`)
           .join("");
       }
 
