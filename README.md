@@ -1,115 +1,64 @@
 # Application Security Engineer Portfolio
 
-A modern, GitHub-themed portfolio website for Application Security Engineers, built with HTML, CSS, and JavaScript. Features dynamic content loading from XML for easy updates.
+A modern, GitHub-themed portfolio website for Application Security Engineers, built with
+plain HTML, CSS, and JavaScript. **One document holds all career data — `resumeData.json` —
+and the page reads it directly.**
 
-## Features
+## Architecture: single source of truth
 
-- Responsive design that works well on all devices
-- GitHub dark theme inspired layout with light/dark mode toggle
-- Content stored in XML file for easy editing
-- Sections for skills, experience, projects, education, and certifications
-- Modern CSS Grid and Flexbox layouts
-- Simple JavaScript for smooth scrolling and interactive elements
-
-## How to Customize
-
-1. **Edit the XML Content**
-   - The easiest way to update your resume is by editing the `resumeData.xml` file
-   - All your personal information, experience, skills, and other sections are stored there
-   - Changes to the XML file will automatically update the website when refreshed
-
-2. **Personal Information**
-   - Edit `resumeData.xml` in the `<personal>` section to update your name, title, and contact information
-   - Replace the profile image URL with your own image
-
-3. **Content Sections**
-   - Update each section in the XML file (`<about>`, `<skills>`, `<experience>`, `<tools>`, etc.)
-   - Add or remove items in each section as needed
-
-4. **Styling**
-   - Customize colors in `css/style.css` by modifying the CSS variables in the `:root` selector
-   - Adjust spacing, fonts, or other visual elements as desired
-
-## XML Structure
-
-The `resumeData.xml` file contains all your resume content and is structured as follows:
-
-```xml
-<resume>
-    <personal>
-        <!-- Personal information (name, title, links) -->
-    </personal>
-    
-    <about>
-        <!-- About me section -->
-    </about>
-    
-    <skills>
-        <!-- Skills categories and items -->
-    </skills>
-    
-    <experience>
-        <!-- Work experience entries -->
-    </experience>
-    
-    <projects>
-        <!-- Project entries -->
-    </projects>
-    
-    <education>
-        <!-- Education entries -->
-    </education>
-    
-    <certifications>
-        <!-- Certification entries -->
-    </certifications>
-    <tools>
-        <!-- Tools entries -->
-    </tools>
-</resume>
 ```
+resumeData.json   <- THE document. All content lives here (edit this, nothing else).
+      │
+      ├──► js/script.js fetches it on page load and renders every section.
+      └──► tools/resume_tools.py --render-txt  →  resume.txt (generated, do not hand-edit)
+```
+
+- `resumeData.json` is the **only** file you edit for content changes. The site loads it
+  directly via `fetch()` — no build step, no server, no re-compile.
+- `resume.txt` is a **generated artifact**. Regenerate it after any JSON change:
+  `python3 tools/resume_tools.py --render-txt`
+- `templates/csv/` is an optional Excel bridge: `--export-csv` dumps the JSON to CSVs,
+  `--import-csv` reads edited CSVs back into the JSON. Not required for normal use.
+
+## Editing workflow
+
+1. Edit `resumeData.json`.
+2. Bump `meta.lastUpdated` (the footer shows this date).
+3. Regenerate the plain-text resume: `python3 tools/resume_tools.py --render-txt`
+4. Sanity check: `python3 tools/resume_tools.py --check`
+5. Commit and push to the `Dev` branch — GitHub Pages serves it automatically.
+
+## JSON structure
+
+Top-level keys in `resumeData.json`:
+
+| Key | Purpose | Rendered by |
+|---|---|---|
+| `meta` | page title, description, last-updated | site |
+| `personal` | name, title, email (site), txtEmail (plain-text resume), github, linkedin, phone, location, profile image | site + txt |
+| `about` | summary bullets | site + txt (Professional Summary) |
+| `skills` | SSDLC category cards | site |
+| `experience` | work history (newest first) | site + txt |
+| `hiddenExperience` | roles kept off the site, shown only in resume.txt (e.g. early-career roles) | txt only |
+| `projects` | selected work cards | site + txt |
+| `education` | degrees | site + txt |
+| `certifications` | cert chips | site + txt |
+| `credlyBadges` | Credly badge UUIDs (embedded live from credly.com) | site |
+| `tools` | tool grid | site |
+| `technicalSkills` | categorized skill list | txt only |
+| `trainings` | trainings & badge list | txt only |
 
 ## Hosting on GitHub Pages
 
-1. **Create a GitHub Repository**
-   - Create a new repository on GitHub named `yourusername.github.io` (replace "yourusername" with your actual GitHub username)
+The site is published from the **`Dev`** branch (repo default). To enable on a fresh fork:
 
-2. **Push Your Code**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin https://github.com/yourusername/yourusername.github.io.git
-   git push -u origin main
-   ```
-
-3. **Enable GitHub Pages**
-   - Go to your repository on GitHub
-   - Navigate to Settings > Pages
-   - Under "Source", select "main" branch
-   - Click Save
-
-4. **View Your Site**
-   - After a few minutes, your site will be available at `https://yourusername.github.io`
-
-## Adding a Custom Domain (Optional)
-
-1. Purchase a domain from a domain registrar (like Namecheap, GoDaddy, etc.)
-2. Add a `CNAME` file to your repository containing your domain name
-3. Configure your domain's DNS settings:
-   - Add an A record pointing to GitHub Pages IP addresses:
-     ```
-     185.199.108.153
-     185.199.109.153
-     185.199.110.153
-     185.199.111.153
-     ```
-   - Or add a CNAME record pointing to `yourusername.github.io`
-4. In your repository settings, add your custom domain and enable HTTPS
+1. Push the repo, then go to **Settings → Pages**.
+2. Under **Source**, select **Deploy from a branch** → branch **`Dev`** → `/ (root)` → Save.
+3. The site appears at `https://<yourusername>.github.io/resume/`.
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+MIT — see [LICENSE](/mahi0x00/resume/blob/Dev/LICENSE).
 
 ## Acknowledgments
 

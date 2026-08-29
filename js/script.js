@@ -1,627 +1,400 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Load resume data from XML
-    loadResumeData();
-    
-    // Update current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+/**
+ * Portfolio renderer — loads everything from resumeData.json (single source of truth).
+ */
+(function () {
+  "use strict";
 
-    // Theme toggle functionality
-    const themeToggle = document.querySelector('.theme-toggle');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    // Add tooltip for theme toggle
-    themeToggle.setAttribute('title', 'Toggle theme (triple-click to use system preference)');
-    
-    // Function to update theme based on system preference
-    function updateThemeBySystemPreference() {
-        const currentTheme = localStorage.getItem('theme');
-        
-        // Only apply system preference if no manual preference is saved
-        if (!currentTheme) {
-            if (prefersDarkScheme.matches) {
-                document.body.classList.remove('light-theme');
-            } else {
-                document.body.classList.add('light-theme');
-            }
-        }
-    }
-    
-    // Function to reset to system preference
-    function resetToSystemPreference() {
-        // Clear saved preference
-        localStorage.removeItem('theme');
-        // Apply system preference
-        updateThemeBySystemPreference();
-    }
-    
-    // Check for saved theme preference or use the system preference
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'light') {
-        document.body.classList.add('light-theme');
-    } else if (currentTheme === 'dark') {
-        document.body.classList.remove('light-theme');
-    } else {
-        // No saved preference, use system preference
-        updateThemeBySystemPreference();
-    }
-    
-    // Toggle theme when button is clicked
-    let clickCount = 0;
-    let clickTimer = null;
-    
-    themeToggle.addEventListener('click', () => {
-        clickCount++;
-        
-        // Reset to system preference on triple click
-        if (clickCount === 3) {
-            resetToSystemPreference();
-            clickCount = 0;
-            clearTimeout(clickTimer);
-            return;
-        }
-        
-        // Normal toggle behavior for single click
-        if (clickCount === 1) {
-            document.body.classList.toggle('light-theme');
-            
-            // Save preference to localStorage
-            if (document.body.classList.contains('light-theme')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        
-        // Reset click count after a delay
-        clearTimeout(clickTimer);
-        clickTimer = setTimeout(() => {
-            clickCount = 0;
-        }, 500);
-    });
-    
-    // Listen for changes in system color scheme preference
-    prefersDarkScheme.addEventListener('change', (event) => {
-        // Only apply if user hasn't set a manual preference
-        if (!localStorage.getItem('theme')) {
-            if (event.matches) {
-                document.body.classList.remove('light-theme');
-            } else {
-                document.body.classList.add('light-theme');
-            }
-        }
-    });
+  const ICONS = {
+    email:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5.03L4 8.24V6.5l8 5.03 8-5.03v1.74z"/></svg>',
+    github:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.49 5.92.43.38.82 1.11.82 2.24v3.32c0 .32.21.7.82.58A12 12 0 0 0 12 .3z"/></svg>',
+    linkedin:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>',
+    folder:
+      '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+  };
 
-    // Smooth scrolling for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 70,
-                    behavior: 'smooth'
-                });
-            }
+  function el(tag, cls, html) {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (html !== undefined) node.innerHTML = html;
+    return node;
+  }
+
+  function skillTag(name) {
+    return `<span class="skill-tag">${name}</span>`;
+  }
+
+  function render(data) {
+      document.title = data.meta.pageTitle || document.title;
+
+      /* ---- Meta description ---- */
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc && data.meta.pageDescription) desc.content = data.meta.pageDescription;
+
+      /* ---- Hero / personal ---- */
+      const p = data.personal;
+      const profileImg = document.getElementById("profile-image");
+      if (profileImg) {
+        profileImg.src = p.profileImage;
+        profileImg.alt = p.name;
+      }
+
+      /* ---- About ---- */
+      const aboutList = document.getElementById("about-list");
+      if (aboutList) {
+        aboutList.className = "about-list";
+        aboutList.innerHTML = data.about
+          .map((line) => `<div class="about-item"><span>${line}</span></div>`)
+          .join("");
+      }
+
+      /* ---- Skills ---- */
+      const skillsGrid = document.getElementById("skills-grid");
+      if (skillsGrid) {
+        skillsGrid.innerHTML = data.skills
+          .map(
+            (cat) => `
+            <div class="skill-card">
+              <h3>${cat.category}</h3>
+              <div class="skill-tags">
+                ${cat.items.map(skillTag).join("")}
+              </div>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Experience timeline ---- */
+      const timeline = document.getElementById("timeline");
+      if (timeline) {
+        timeline.innerHTML = data.experience
+          .map((job, i) => {
+            const logo = job.logo
+              ? `<img class="tl-logo" src="${job.logo}" alt="${job.company} logo" loading="lazy" />`
+              : "";
+            return `
+            <div class="tl-item${i === 0 ? " current" : ""}">
+              <span class="tl-dot"></span>
+              <div class="tl-period">${job.period}</div>
+              <div class="tl-head">
+                ${logo}
+                <div>
+                  <div class="tl-title">${job.title}</div>
+                  <div class="tl-company">${job.company} · ${job.location}</div>
+                </div>
+              </div>
+              <ul class="resp-list">
+                ${job.responsibilities.map((r) => `<li>${r}</li>`).join("")}
+              </ul>
+              <div class="tl-tags">${(job.skills || []).map(skillTag).join("")}</div>
+            </div>`;
+          })
+          .join("");
+      }
+
+      /* ---- Projects ---- */
+      const projectsGrid = document.getElementById("projects-grid");
+      if (projectsGrid) {
+        projectsGrid.innerHTML = data.projects
+          .map(
+            (prj) => `
+            <div class="project-card">
+              <div class="project-folder">${ICONS.folder}</div>
+              <h3>${prj.title}</h3>
+              <p>${prj.description}</p>
+              <div class="project-tags">${prj.tags.map((t) => `<span>${t}</span>`).join("")}</div>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Education ---- */
+      const eduList = document.getElementById("education-list");
+      if (eduList) {
+        eduList.innerHTML = data.education
+          .map(
+            (ed) => `
+            <div class="edu-card">
+              <img class="edu-logo" src="${ed.logo}" alt="${ed.institution}" loading="lazy" />
+              <div class="edu-info">
+                <h3>${ed.title}</h3>
+                <p>${ed.institution} · ${ed.location}</p>
+                <div class="edu-period">${ed.period}</div>
+              </div>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Certifications + Credly badges ---- */
+      const certs = document.getElementById("certs-container");
+      if (certs) {
+        certs.innerHTML = data.certifications
+          .map(
+            (cert) => `
+            <div class="cert-chip">
+              <img src="${cert.logo}" alt="${cert.title}" loading="lazy" />
+              <div>
+                <div class="t">${cert.title}</div>
+                <div class="y">${cert.year}</div>
+              </div>
+            </div>`
+          )
+          .join("");
+      }
+      const credly = document.getElementById("credly-badges");
+      if (credly && (data.credlyBadges || []).length) {
+        /* Official Credly embed — renders real badge artwork via their embed script */
+        data.credlyBadges.forEach((id) => {
+          const badge = document.createElement("div");
+          badge.style.display = "inline-block";
+          badge.setAttribute("data-iframe-width", "150");
+          badge.setAttribute("data-iframe-height", "270");
+          badge.setAttribute("data-share-badge-id", id);
+          badge.setAttribute("data-share-badge-host", "https://www.credly.com");
+          credly.appendChild(badge);
         });
+        const s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://cdn.credly.com/assets/utilities/embed.js";
+        document.body.appendChild(s);
+      }
+
+      /* ---- Tools ---- */
+      const tools = document.getElementById("tools-container");
+      if (tools) {
+        tools.innerHTML = data.tools
+          .map(
+            (tool) => `
+            <div class="tool-tile">
+              <img src="${tool.logo}" alt="${tool.name}" loading="lazy"
+                   onerror="this.onerror=null;this.style.visibility='hidden';" />
+              <span>${tool.name}</span>
+            </div>`
+          )
+          .join("");
+      }
+
+      /* ---- Contact links ---- */
+      const links = document.getElementById("contact-links");
+      if (links) {
+        const items = [
+          { href: `mailto:${p.email}`, icon: ICONS.email, label: "Email" },
+          { href: `https://github.com/${p.github}`, icon: ICONS.github, label: `github/${p.github}` },
+          { href: `https://linkedin.com/in/${p.linkedin}`, icon: ICONS.linkedin, label: `linkedin/${p.linkedin}` },
+        ];
+        links.innerHTML = items
+          .map((it) => `<a class="contact-link" href="${it.href}" target="_blank" rel="noopener">${it.icon}${it.label}</a>`)
+          .join("");
+      }
+
+      /* ---- Footer ---- */
+      const yearEl = document.getElementById("current-year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+      const upd = document.getElementById("last-updated");
+      if (upd) upd.textContent = data.meta.lastUpdated || "";
+
+      initReveal();
+      initCounters();
+  }
+
+  /* ---- Last-known-good cache: if the live data is unavailable/invalid,
+         render the last good copy instead of a blank page. ---- */
+  const CACHE_KEY = "resumeDataCache.v1";
+  function readCache() {
+    try { return JSON.parse(localStorage.getItem(CACHE_KEY)); } catch (e) { return null; }
+  }
+  function writeCache(data) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch (e) { /* storage unavailable */ }
+  }
+
+  fetch("resumeData.json")
+    .then((r) => {
+      if (!r.ok) throw new Error("Failed to load resumeData.json");
+      return r.json();
+    })
+    .then((data) => {
+      writeCache(data);
+      render(data);
+    })
+    .catch((err) => {
+      console.warn("[portfolio] live data unavailable:", err);
+      const cached = readCache();
+      if (cached) {
+        console.warn("[portfolio] rendering last known-good copy from cache");
+        render(cached);
+      } else {
+        console.error("[portfolio] no cached copy available — page will be empty");
+      }
     });
 
-    // Add hover effect to project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.borderColor = '#58a6ff';
+  /* ---- Scroll reveal ---- */
+  function initReveal() {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            obs.unobserve(e.target);
+          }
         });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.borderColor = '';
+      },
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll(".reveal").forEach((n) => obs.observe(n));
+  }
+
+  /* ---- Animated counters ---- */
+  function initCounters() {
+    const nums = document.querySelectorAll(".stat-card .num[data-target]");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const node = e.target;
+          const target = parseInt(node.dataset.target, 10);
+          const dur = 1100;
+          const t0 = performance.now();
+          (function tick(t) {
+            const k = Math.min((t - t0) / dur, 1);
+            node.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+            if (k < 1) requestAnimationFrame(tick);
+          })(t0);
+          obs.unobserve(node);
         });
+      },
+      { threshold: 0.4 }
+    );
+    nums.forEach((n) => obs.observe(n));
+  }
+})();
+
+/* ============================================================
+   Nav behaviour (scroll state, mobile drawer, active link)
+   ============================================================ */
+(function () {
+  "use strict";
+
+  const nav = document.getElementById("nav");
+  const burger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+
+  window.addEventListener("scroll", () => {
+    nav.classList.toggle("scrolled", window.scrollY > 10);
+  }, { passive: true });
+
+  if (burger && navLinks) {
+    burger.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      burger.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("nav-open", open);
     });
 
-    // Typewriter effect for last name
-    const lastNameElement = document.querySelector('.profile-content h1 .last-name');
-    const lastName = lastNameElement.textContent;
-    lastNameElement.textContent = '';
-    
-    function typeWriter(text, element, delay = 50) {
-        let index = 0;
-        element.textContent = ''; // Clear the text content before starting
-        function type() {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                setTimeout(type, delay);
-            }
-        }
-        type();
-    }
-
-    document.querySelector('.profile-content h1').addEventListener('mouseenter', () => {
-        lastNameElement.style.visibility = 'visible';
-        typeWriter(lastName, lastNameElement);
+    navLinks.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        navLinks.classList.remove("open");
+        burger.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+      }
     });
-});
+  }
 
-/**
- * Loads resume data from XML file and populates the HTML
- */
-function loadResumeData() {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            const xmlDoc = this.responseXML;
-            
-            // Load personal information
-            loadPersonalInfo(xmlDoc);
-            
-            // Load about section
-            loadAboutSection(xmlDoc);
-            
-            // Load skills section
-            loadSkillsSection(xmlDoc);
-            
-            // Load experience section
-            loadExperienceSection(xmlDoc);
-            
-            // Load projects section
-            loadProjectsSection(xmlDoc);
-            
-            // Load education section
-            loadEducationSection(xmlDoc);
-            
-            // Load certifications section
-            loadCertificationsSection(xmlDoc);
-            
-            // Update footer
-            updateFooter(xmlDoc);
-
-            loadToolsSection(xmlDoc); // Add this line
+  /* Active section highlighting */
+  const sections = document.querySelectorAll("main section[id], header[id]");
+  const linkMap = new Map();
+  document.querySelectorAll(".nav-links a").forEach((a) => {
+    linkMap.set(a.getAttribute("href").slice(1), a);
+  });
+  const secObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        const link = linkMap.get(e.target.id);
+        if (!link) return;
+        if (e.isIntersecting) {
+          linkMap.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
         }
-    };
-    xhr.open("GET", "resumeData.xml", true);
-    xhr.send();
-}
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  sections.forEach((s) => secObs.observe(s));
+})();
 
-/**
- * Loads personal information from XML
- */
-function loadPersonalInfo(xmlDoc) {
-    const personal = xmlDoc.getElementsByTagName("personal")[0];
-    const firstName = personal.getElementsByTagName("firstName")[0].textContent;
-    const lastName = personal.getElementsByTagName("lastName")[0].textContent;
-    const title = personal.getElementsByTagName("title")[0].textContent;
-    const profileImage = personal.getElementsByTagName("profileImage")[0].textContent;
-    const email = personal.getElementsByTagName("email")[0].textContent;
-    const github = personal.getElementsByTagName("github")[0].textContent;
-    const linkedin = personal.getElementsByTagName("linkedin")[0].textContent;
-    const resumePdf = personal.getElementsByTagName("resumePdf")[0].textContent;
-    
-    // Update the DOM with personal information
-    document.querySelector('.profile-content h1 .first-name').textContent = firstName;
-    document.querySelector('.profile-content h1 .last-name').textContent = lastName;
-    document.querySelector('.profile-content .subtitle').textContent = title;
-    document.querySelector('.profile-image').src = profileImage;
-    document.querySelector('.profile-links a[title="Email"]').href = `mailto:${email}`;
-    document.querySelector('.profile-links a[title="GitHub"]').href = `https://github.com/${github}`;
-    document.querySelector('.profile-links a[title="LinkedIn"]').href = `https://linkedin.com/in/${linkedin}`;
-    document.querySelector('.profile-links a[title="Resume"]').href = resumePdf;
-    
-    // Add download button
-    const profileLinks = document.querySelector('.profile-links');
-    const downloadLink = document.createElement('a');
-    downloadLink.href = "#"; // Use # as href since we'll handle click with JavaScript
-    downloadLink.setAttribute('title', 'Download Resume');
-    
-    const downloadIcon = document.createElement('i');
-    downloadIcon.className = 'fas fa-download';
-    downloadLink.appendChild(downloadIcon);
-    
-    // Add click event to generate PDF
-    downloadLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (typeof generateResumePDF === 'function') {
-            generateResumePDF();
-        } else {
-            console.error('PDF generator function not available');
-            // Fallback to direct download if PDF generator is not available
-            window.location.href = resumePdf;
-        }
-    });
-    
-    profileLinks.appendChild(downloadLink);
-}
+/* ============================================================
+   Particle network hero background (desktop only)
+   ============================================================ */
+(function () {
+  "use strict";
 
-/**
- * Loads about section from XML
- */
-function loadAboutSection(xmlDoc) {
-    const about = xmlDoc.getElementsByTagName("about")[0];
-    const summaryPoints = about.getElementsByTagName("point");
-    
-    // Update the DOM with about information
-    const aboutSection = document.querySelector('.about');
-    const sectionHeader = aboutSection.querySelector('.section-header');
-    
-    // Clear existing content except the header
-    aboutSection.innerHTML = '';
-    aboutSection.appendChild(sectionHeader);
-    
-    // If there are specific points, use bullet points
-    if (summaryPoints && summaryPoints.length > 0) {
-        const bulletList = document.createElement('ul');
-        bulletList.className = 'about-list';
-        
-        for (let i = 0; i < summaryPoints.length; i++) {
-            const listItem = document.createElement('li');
-            listItem.textContent = summaryPoints[i].textContent;
-            bulletList.appendChild(listItem);
-        }
-        
-        aboutSection.appendChild(bulletList);
-    } else {
-        // Fallback to using the summary paragraph if no points are defined
-        const summary = about.getElementsByTagName("summary")[0].textContent;
-        const paragraph = document.createElement('p');
-        paragraph.textContent = summary;
-        aboutSection.appendChild(paragraph);
+  const canvas = document.getElementById("particles-canvas");
+  if (!canvas) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+  let raf;
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const LINK_DIST = 130;
+  const MAX_PARTICLES = 70;
+
+  function resize() {
+    const hero = canvas.parentElement;
+    canvas.width = hero.offsetWidth * DPR;
+    canvas.height = hero.offsetHeight * DPR;
+    canvas.style.width = hero.offsetWidth + "px";
+    canvas.style.height = hero.offsetHeight + "px";
+    const count = Math.min(MAX_PARTICLES, Math.floor((canvas.width * canvas.height) / 26000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35 * DPR,
+      vy: (Math.random() - 0.5) * 0.35 * DPR,
+      r: (Math.random() * 1.4 + 0.6) * DPR,
+    }));
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(56, 189, 248, 0.45)";
+      ctx.fill();
     }
-}
-
-/**
- * Loads skills section from XML
- */
-function loadSkillsSection(xmlDoc) {
-    const skills = xmlDoc.getElementsByTagName("skills")[0];
-    const categories = skills.getElementsByTagName("category");
-    const skillsContainer = document.querySelector('.skills-container');
-    
-    // Clear existing skills
-    skillsContainer.innerHTML = '';
-    
-    // Add skills from XML
-    for (let i = 0; i < categories.length; i++) {
-        const category = categories[i];
-        const categoryName = category.getAttribute("name");
-        const skillItems = category.getElementsByTagName("skill");
-        
-        const skillCategory = document.createElement('div');
-        skillCategory.className = 'skill-category';
-        
-        const categoryTitle = document.createElement('h3');
-        categoryTitle.textContent = categoryName;
-        skillCategory.appendChild(categoryTitle);
-        
-        const skillsList = document.createElement('ul');
-        for (let j = 0; j < skillItems.length; j++) {
-            const skillItem = document.createElement('li');
-            skillItem.textContent = skillItems[j].textContent;
-            skillsList.appendChild(skillItem);
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < LINK_DIST * DPR) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle =
+            "rgba(129, 140, 248," + (0.14 * (1 - dist / (LINK_DIST * DPR))).toFixed(3) + ")";
+          ctx.lineWidth = DPR * 0.6;
+          ctx.stroke();
         }
-        
-        skillCategory.appendChild(skillsList);
-        skillsContainer.appendChild(skillCategory);
+      }
     }
-}
+    raf = requestAnimationFrame(step);
+  }
 
-/**
- * Loads experience section from XML
- */
-function loadExperienceSection(xmlDoc) {
-    const experience = xmlDoc.getElementsByTagName("experience")[0];
-    const jobs = experience.getElementsByTagName("job");
-    const experienceSection = document.querySelector('section.experience');
-    
-    // Keep the section header and remove the rest
-    const sectionHeader = experienceSection.querySelector('.section-header');
-    experienceSection.innerHTML = '';
-    experienceSection.appendChild(sectionHeader);
-    
-    // Add jobs from XML
-    for (let i = 0; i < jobs.length; i++) {
-        const job = jobs[i];
-        const title = job.getElementsByTagName("title")[0].textContent;
-        const company = job.getElementsByTagName("company")[0].textContent;
-        const locationElement = job.getElementsByTagName("location")[0];
-        const location = locationElement ? locationElement.textContent : "";
-        const logoElement = job.getElementsByTagName("logo")[0];
-        const logo = logoElement ? logoElement.textContent : null;
-        const period = job.getElementsByTagName("period")[0].textContent;
-        const responsibilities = job.getElementsByTagName("item");
-        const skills = job.getElementsByTagName("skill");
-        
-        const jobElement = document.createElement('div');
-        jobElement.className = 'experience-item';
-        
-        // Logo container
-        const logoContainer = document.createElement('div');
-        logoContainer.className = 'experience-logo-container';
-        
-        if (logo) {
-            const logoImg = document.createElement('img');
-            logoImg.src = logo;
-            logoImg.alt = company + ' logo';
-            logoImg.title = company;
-            logoImg.className = 'company-logo';
-            logoContainer.appendChild(logoImg);
-        }
-        
-        jobElement.appendChild(logoContainer);
-        
-        // Content container
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'experience-content';
-        
-        // Add title
-        const titleElement = document.createElement('h3');
-        titleElement.className = 'experience-title';
-        titleElement.textContent = title;
-        contentContainer.appendChild(titleElement);
-        
-        // Add company
-        const companyElement = document.createElement('div');
-        companyElement.className = 'experience-company';
-        companyElement.textContent = company;
-        contentContainer.appendChild(companyElement);
-        
-        // Add date and location
-        const dateLocationElement = document.createElement('div');
-        dateLocationElement.className = 'experience-date-location';
-        dateLocationElement.textContent = period;
-        contentContainer.appendChild(dateLocationElement);
-        
-        if (location) {
-            const locationElement = document.createElement('div');
-            locationElement.className = 'experience-location';
-            locationElement.textContent = location;
-            contentContainer.appendChild(locationElement);
-        }
-        
-        // Add responsibilities
-        if (responsibilities.length > 0) {
-            const respList = document.createElement('ul');
-            for (let j = 0; j < responsibilities.length; j++) {
-                const respItem = document.createElement('li');
-                respItem.textContent = responsibilities[j].textContent;
-                respList.appendChild(respItem);
-            }
-            contentContainer.appendChild(respList);
-        }
-        
-        // Add skills tags
-        if (skills.length > 0) {
-            const skillsContainer = document.createElement('div');
-            skillsContainer.className = 'experience-skills';
-            
-            for (let j = 0; j < skills.length; j++) {
-                const skillSpan = document.createElement('span');
-                skillSpan.textContent = skills[j].textContent;
-                skillsContainer.appendChild(skillSpan);
-            }
-            
-            contentContainer.appendChild(skillsContainer);
-        }
-        
-        jobElement.appendChild(contentContainer);
-        experienceSection.appendChild(jobElement);
-    }
-}
-
-/**
- * Loads projects section from XML
- */
-function loadProjectsSection(xmlDoc) {
-    const projects = xmlDoc.getElementsByTagName("projects")[0];
-    const projectItems = projects.getElementsByTagName("project");
-    const projectsGrid = document.querySelector('.projects-grid');
-    
-    // Clear existing projects
-    projectsGrid.innerHTML = '';
-    
-    // Add projects from XML
-    for (let i = 0; i < projectItems.length; i++) {
-        const project = projectItems[i];
-        const title = project.getElementsByTagName("title")[0].textContent;
-        const description = project.getElementsByTagName("description")[0].textContent;
-        const tags = project.getElementsByTagName("tag");
-        
-        const projectCard = document.createElement('div');
-        projectCard.className = 'project-card';
-        
-        const projectTitle = document.createElement('h3');
-        projectTitle.textContent = title;
-        projectCard.appendChild(projectTitle);
-        
-        const projectDesc = document.createElement('p');
-        projectDesc.textContent = description;
-        projectCard.appendChild(projectDesc);
-        
-        const projectTags = document.createElement('div');
-        projectTags.className = 'project-tags';
-        
-        for (let j = 0; j < tags.length; j++) {
-            const tagSpan = document.createElement('span');
-            tagSpan.textContent = tags[j].textContent;
-            projectTags.appendChild(tagSpan);
-        }
-        
-        projectCard.appendChild(projectTags);
-        projectsGrid.appendChild(projectCard);
-    }
-}
-
-/**
- * Loads education section from XML
- */
-function loadEducationSection(xmlDoc) {
-    const education = xmlDoc.getElementsByTagName("education")[0];
-    const degrees = education.getElementsByTagName("degree");
-    const educationSection = document.querySelector('section.education');
-    
-    // Keep the section header and remove the rest
-    const sectionHeader = educationSection.querySelector('.section-header');
-    educationSection.innerHTML = '';
-    educationSection.appendChild(sectionHeader);
-    
-    // Add education from XML
-    for (let i = 0; i < degrees.length; i++) {
-        const degree = degrees[i];
-        const title = degree.getElementsByTagName("title")[0].textContent;
-        const institution = degree.getElementsByTagName("institution")[0].textContent;
-        const locationElement = degree.getElementsByTagName("location")[0];
-        const location = locationElement ? locationElement.textContent : "";
-        const logoElement = degree.getElementsByTagName("logo")[0];
-        const logo = logoElement ? logoElement.textContent : null;
-        const period = degree.getElementsByTagName("period")[0].textContent;
-        
-        const eduItem = document.createElement('div');
-        eduItem.className = 'education-item';
-        
-        // Logo container
-        const logoContainer = document.createElement('div');
-        logoContainer.className = 'education-logo-container';
-        
-        if (logo) {
-            const logoImg = document.createElement('img');
-            logoImg.src = logo;
-            logoImg.alt = institution + ' logo';
-            logoImg.title = institution;
-            logoImg.className = 'institution-logo';
-            logoContainer.appendChild(logoImg);
-        }
-        
-        eduItem.appendChild(logoContainer);
-        
-        // Content container
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'education-content';
-        
-        // Add title
-        const titleElement = document.createElement('h3');
-        titleElement.className = 'education-title';
-        titleElement.textContent = title;
-        contentContainer.appendChild(titleElement);
-        
-        // Add institution
-        const institutionElement = document.createElement('div');
-        institutionElement.className = 'education-institution';
-        institutionElement.textContent = institution;
-        contentContainer.appendChild(institutionElement);
-        
-        // Add date and location
-        const dateLocationElement = document.createElement('div');
-        dateLocationElement.className = 'education-date-location';
-        dateLocationElement.textContent = period;
-        contentContainer.appendChild(dateLocationElement);
-        
-        if (location) {
-            const locationElement = document.createElement('div');
-            locationElement.className = 'education-location';
-            locationElement.textContent = location;
-            contentContainer.appendChild(locationElement);
-        }
-        
-        eduItem.appendChild(contentContainer);
-        educationSection.appendChild(eduItem);
-    }
-}
-
-/**
- * Loads certifications section from XML
- */
-function loadCertificationsSection(xmlDoc) {
-    const certifications = xmlDoc.getElementsByTagName("certifications")[0];
-    const certItems = certifications.getElementsByTagName("certification");
-    const certsContainer = document.querySelector('.certifications-container');
-    
-    // Clear existing certifications
-    certsContainer.innerHTML = '';
-    
-    // Add certifications from XML
-    for (let i = 0; i < certItems.length; i++) {
-        const cert = certItems[i];
-        const title = cert.getElementsByTagName("title")[0].textContent;
-        const year = cert.getElementsByTagName("year")[0].textContent;
-        const logoElement = cert.getElementsByTagName("logo")[0];
-        const logo = logoElement ? logoElement.textContent : null;
-        
-        const certItem = document.createElement('div');
-        certItem.className = 'certification-item';
-        
-        // Logo container
-        const logoContainer = document.createElement('div');
-        logoContainer.className = 'certification-logo-container';
-        
-        if (logo) {
-            const logoImg = document.createElement('img');
-            logoImg.src = logo;
-            logoImg.alt = title + ' logo';
-            logoImg.title = title;
-            logoImg.className = 'certification-logo';
-            logoContainer.appendChild(logoImg);
-        }
-        
-        certItem.appendChild(logoContainer);
-        
-        // Content container
-        const contentContainer = document.createElement('div');
-        contentContainer.className = 'certification-content';
-        
-        const certTitle = document.createElement('h3');
-        certTitle.textContent = title;
-        contentContainer.appendChild(certTitle);
-        
-        const certYear = document.createElement('span');
-        certYear.className = 'certification-date';
-        certYear.textContent = year;
-        contentContainer.appendChild(certYear);
-        
-        certItem.appendChild(contentContainer);
-        certsContainer.appendChild(certItem);
-    }
-}
-
-/**
- * Loads tools section from XML
- */
-function loadToolsSection(xmlDoc) {
-    const tools = xmlDoc.getElementsByTagName("tools")[0];
-    const toolItems = tools.getElementsByTagName("tool");
-    const toolsContainer = document.querySelector('.tools-container');
-    
-    // Clear existing tools
-    toolsContainer.innerHTML = '';
-    
-    // Add tools from XML
-    for (let i = 0; i < toolItems.length; i++) {
-        const tool = toolItems[i];
-        const name = tool.getElementsByTagName("name")[0].textContent;
-        const logo = tool.getElementsByTagName("logo")[0].textContent;
-        
-        const toolItem = document.createElement('div');
-        toolItem.className = 'tool-item';
-        
-        const toolLogo = document.createElement('img');
-        toolLogo.src = logo;
-        toolLogo.alt = name + ' logo';
-        toolLogo.className = 'tool-logo';
-        
-        const toolName = document.createElement('p');
-        toolName.textContent = name;
-        
-        toolItem.appendChild(toolLogo);
-        toolItem.appendChild(toolName);
-        toolsContainer.appendChild(toolItem);
-    }
-}
-
-/**
- * Updates footer with name from XML
- */
-function updateFooter(xmlDoc) {
-    const personal = xmlDoc.getElementsByTagName("personal")[0];
-    const name = personal.getElementsByTagName("name")[0].textContent;
-    
-    const footerText = document.querySelector('footer p');
-    footerText.innerHTML = `&copy; <span id="current-year">${new Date().getFullYear()}</span> ${name}. All rights reserved.`;
-}
+  resize();
+  window.addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else raf = requestAnimationFrame(step);
+  });
+  step();
+})();

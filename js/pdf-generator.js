@@ -95,16 +95,5 @@ function generateResumePDF() {
     }, 100);
 }
 
-// Check if the download button exists and add event listener
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait for the download button to be created by script.js
-    setTimeout(() => {
-        const downloadButton = document.querySelector('a[title="Download Resume"]');
-        if (downloadButton) {
-            downloadButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                generateResumePDF();
-            });
-        }
-    }, 1000); // Add a delay to ensure the button is loaded
-}); 
+// PDF download click is handled in script.js where the button is created.
+// No duplicate listener needed here.

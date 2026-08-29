@@ -1,0 +1,19 @@
+category,item
+Requirements,Security Requirements Gathering
+Requirements,Threat Modeling
+Requirements,Risk Assessment
+Design,Secure Design Principles
+Design,Security Architecture
+Design,Data Protection Strategies
+Implementation,Secure Coding Practices
+Implementation,Static Application Security Testing (SAST)
+Implementation,Dependency Management
+Verification,Dynamic Application Security Testing (DAST)
+Verification,Interactive Application Security Testing (IAST)
+Verification,Vulnerability assessment - Penetration Testing (VAPT)
+Release,Security Configuration Management
+Release,Compliance Validation
+Release,Secure Deployment Practices
+Response,Incident Response Planning
+Response,Monitoring and Logging
+Response,Post-Incident Analysis
