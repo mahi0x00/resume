@@ -137,7 +137,7 @@ IT Recruitment Roles
 
 ### **Education & Certifications**
 
-- **Master of Technology in Software Systems (Security)** – Birla Institute of Technology and Science (BITS-WILP) (2024 - 2026)
+- **Master of Technology in Software Systems (Security)** – Birla Institute of Technology and Science (2024 - 2026)
 - **Bachelor of Technology in Computer Science** – Jawaharlal Nehru Technological University (2007 - 2011)
 - **Certifications:**
   - Certified Ethical Hacker (CEH) (2013)
