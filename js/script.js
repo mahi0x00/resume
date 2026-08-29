@@ -26,12 +26,7 @@
     return `<span class="skill-tag">${name}</span>`;
   }
 
-  fetch("resumeData.json")
-    .then((r) => {
-      if (!r.ok) throw new Error("Failed to load resumeData.json");
-      return r.json();
-    })
-    .then((data) => {
+  function render(data) {
       document.title = data.meta.pageTitle || document.title;
 
       /* ---- Meta description ---- */
@@ -204,8 +199,37 @@
 
       initReveal();
       initCounters();
+  }
+
+  /* ---- Last-known-good cache: if the live data is unavailable/invalid,
+         render the last good copy instead of a blank page. ---- */
+  const CACHE_KEY = "resumeDataCache.v1";
+  function readCache() {
+    try { return JSON.parse(localStorage.getItem(CACHE_KEY)); } catch (e) { return null; }
+  }
+  function writeCache(data) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch (e) { /* storage unavailable */ }
+  }
+
+  fetch("resumeData.json")
+    .then((r) => {
+      if (!r.ok) throw new Error("Failed to load resumeData.json");
+      return r.json();
     })
-    .catch((err) => console.error("[portfolio]", err));
+    .then((data) => {
+      writeCache(data);
+      render(data);
+    })
+    .catch((err) => {
+      console.warn("[portfolio] live data unavailable:", err);
+      const cached = readCache();
+      if (cached) {
+        console.warn("[portfolio] rendering last known-good copy from cache");
+        render(cached);
+      } else {
+        console.error("[portfolio] no cached copy available — page will be empty");
+      }
+    });
 
   /* ---- Scroll reveal ---- */
   function initReveal() {
