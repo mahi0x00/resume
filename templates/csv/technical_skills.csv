@@ -1,0 +1,35 @@
+category,item
+Languages,Python
+Languages,Groovy
+Languages,Bash
+Cloud,"AWS (IAM, S3, Lambda, EC2, RDS, Security Hub, GuardDuty, CloudTrail, Config, VPC, KMS)"
+DevSecOps,Jenkins
+DevSecOps,Spinnaker
+DevSecOps,GitHub Security
+DevSecOps,Checkmarx
+DevSecOps,Whitesource
+Security Tools,Burp Suite
+Security Tools,OWASP ZAP
+Security Tools,Nmap
+Security Tools,SQLMap
+Security Tools,Wireshark
+Security Tools,Metasploit
+Security Tools,STRIDE
+Security Tools,MITRE Caldera
+Security Tools,AttackIQ
+Security Tools,OpenBAS
+Container & Infra,Anchore
+Container & Infra,Prisma
+Container & Infra,Tenable
+Container & Infra,OpenVAS
+Container & Infra,NeXpose
+Monitoring & SIEM,Prometheus
+Monitoring & SIEM,Grafana
+Monitoring & SIEM,Splunk
+Monitoring & SIEM,ELK Stack
+Monitoring & SIEM,Uptycs
+Automation & AI,AWS Lambda
+Automation & AI,OpenAI/Gemini
+Automation & AI,N8n
+Automation & AI,MCP Servers
+Automation & AI,custom scripts

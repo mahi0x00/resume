@@ -1,0 +1,8 @@
+title,description,tags
+Security Framework Implementation,"Developed and implemented a comprehensive security framework for a financial institution's web applications, reducing security incidents by 45%.",OWASP | Security Architecture | Risk Assessment
+Automated Security Testing Pipeline,"Created an automated security testing pipeline integrated with Jenkins, catching 85% of security issues before production deployment.",DevSecOps | CI/CD | SAST/DAST
+Security Awareness Training Program,"Designed and delivered a company-wide security awareness program, resulting in a 60% decrease in successful phishing attempts.",Security Awareness | Training | Social Engineering
+API Security Gateway,Implemented an API security gateway with robust authentication and authorization controls for a healthcare application handling sensitive data.,API Security | OAuth 2.0 | Rate Limiting
+AI-enhanced Burp Extension,Reduced manual triage by 40% using OpenAI/Gemini to analyze HTTP traffic.,Burp Suite | AI | Pentesting
+Security Metrics Dashboard,"Unified Checkmarx, Nexpose, and Uptycs data into Grafana via Prometheus exporters.",Grafana | SIEM | Automation
+Automated Red Team Playbooks,Standardized MITRE-mapped simulations with Python scripts for Caldera and AttackIQ.,MITRE ATT&CK | Red Teaming | Python

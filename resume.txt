@@ -1,23 +1,33 @@
 **Mahendhar Reddy Kadari**\
 Senior Specialist - Software Engineering | Application Security | AI Security Advocate\
 Hyderabad, Telangana, India\
-+91-9666569659 | [mahendhar.kadari@gmail.com](mailto:mahendhar.kadari@gmail.com)\
++91-9666569659 | [mahendhar.kadari+resume@gmail.com](mailto:mahendhar.kadari+resume@gmail.com)\
 [LinkedIn](https://www.linkedin.com/in/mahi0x00/) | [Portfolio](https://mahi0x00.github.io/resume/)
 
 ---
 
 ### **Professional Summary**
 
-- 11+ years of experience in application security, DevSecOps, and red teaming.
-- Specialized in embedding security into CI/CD pipelines and automating security processes.
-- Proven expertise in threat modeling, penetration testing, and compliance (PCI-DSS, SOC2, SOC3).
-- Skilled in building AI-driven security tools and dashboards.
-- Strong collaborator with cross-functional teams to enhance the enterprise security posture.
-- Deep experience in AWS cloud security, including automation, monitoring, and compliance.
+- 11+ years of experience in Application Security and SSDLC
+- Expert in DevSecOps, threat modeling, SAST, and SCA
+- Conducted web and API penetration testing in fintech
+- Built Burp Suite extensions for AI Augmented Penetration testing
+- Performed LLM red-teaming and prompt injection testing
+- Used Garak's auto red-team module for LLM scans
+- Applied Giskard for automated LLM vulnerability testing
+- Implemented NeMo Guardrails to enforce LLM safety
+- Automated security workflows with n8n and Langflow
+- Validated LLM inputs/outputs to prevent data leakage
+- Won hackathon for building AI–API interoperability server
+- Proven expertise in threat modeling, penetration testing, and compliance (PCI-DSS, SOC2, SOC3)
+- Deep experience in AWS cloud security, including automation, monitoring, and compliance
+- Skilled in building AI-driven security tools and dashboards
+- Strong collaborator with cross-functional teams to enhance enterprise security posture
 
 ---
 
 ### **Technical Skills**
+
 - **Languages:** Python, Groovy, Bash
 - **Cloud:** AWS (IAM, S3, Lambda, EC2, RDS, Security Hub, GuardDuty, CloudTrail, Config, VPC, KMS)
 - **DevSecOps:** Jenkins, Spinnaker, GitHub Security, Checkmarx, Whitesource
@@ -30,16 +40,30 @@ Hyderabad, Telangana, India\
 
 ### **Professional Experience**
 
-**AT&T, Hyderabad, India**  
+**AT&T, Hyderabad, Telangana, India.**  
 Senior Specialist - Software Engineering  
-*Feb 2025 – Present*
+*Nov 2025 - Present*
 
-- Driving software engineering initiatives as a Senior Specialist in the engineering organization.
+- Driving software engineering initiatives as a Senior Specialist in the engineering organization
+  
+*Skills: Software Engineering, Application Security, DevSecOps, Azure, Veracode, Tenable*
 
-**Ocrolus Inc., Remote, India**  
-Sr. Application Security Engineer  
-*Jan 2024 – Jan 2025*
+**Ocrolus. Inc., Gurugram, Haryana, India. (Remote)**  
+Senior Application Security Engineer  
+*Jan 2024 - Nov 2025*
 
+- Led secure development lifecycle (SSDLC) initiatives including threat modeling, static code analysis (SAST), and software composition analysis (SCA)
+- Performed comprehensive web and API penetration testing on high-risk and high-scale systems
+- Developed custom Burp Suite extensions powered by Gemini and ChatGPT to augment pentesting workflows
+- Conducted LLM red-teaming assessments focused on prompt injection, jailbreaks, hallucinations, and data leakage risks
+- Automated LLM vulnerability testing using Giskard's open-source framework
+- Utilized Garak's auto red-team module to automate LLM vulnerability scanning for issues like prompt injection, hallucinations, and safety bypasses
+- Leveraged NVIDIA Garak's probes, detectors, and harnesses to scan LLMs for safety issues including toxicity and false reasoning
+- Applied NVIDIA NeMo Guardrails to control and filter unsafe or unauthorized LLM behavior
+- Built internal AI-driven workflow automations using n8n and Langflow to streamline security processes
+- Won company-wide hackathon for building an MCP Server enabling secure AI-to-API interoperability
+- Enforced secure AI practices including input/output sanitization, training data scrubbing, and third-party library validation
+- Collaborated with ML, data, and engineering teams to ensure end-to-end LLM governance and privacy protection
 - Embedded security in SSDLC using Jira, Confluence, GitHub.
 - Led threat modeling with STRIDE, Threat Dragon in Jira.
 - Set secure coding standards; integrated SAST in CI/CD.
@@ -57,10 +81,12 @@ Sr. Application Security Engineer
 - Evaluated AI (OpenAI/Gemini) for security workflows.
 - Advised on security best practices for AI adoption.
 - Ran a hackathon for Security Awareness Month.
+  
+*Skills: SSDLC, DevSecOps, LLM Security, Workflow Automation, Web and API Penetration Testing*
 
-**Lookout, Inc., Hyderabad, India**  
-Security Intelligence Engineer  
-*May 2021 – Jan 2024*
+**Lookout. Inc., Hyderabad, Telangana, India. (Remote)**  
+Security Intelligence Engineer - Product Security  
+*May 2021 - Jan 2024*
 
 - Collaborated to design secure software solutions.
 - Assessed vulnerabilities in web, API, mobile, and cloud.
@@ -78,56 +104,68 @@ Security Intelligence Engineer
 - Presented security evidence to stakeholders, auditors.
 - Supported FedRAMP cycles by meeting all requirements.
 - Acted as liaison with 3PAOs during FedRAMP audits.
+  
+*Skills: Penetration Testing, Secure Code Review, SDLC Integration, CI/CD Security, Mobile Security*
 
-**CipherCloud (Acquired by Lookout), Hyderabad, India**  
+**CipherCloud. Inc., Hyderabad, Telangana, India.**  
 Security Analyst  
-*Sep 2014 – May 2021*
+*Sep 2014 - May 2021*
 
-- Led VAPT engagements and authored detailed security assessment reports.
+- Led VAPT engagements and wrote security assessment reports.
 - Performed static code analysis, triaged vulnerabilities, and provided remediation guidance.
 - Identified AWS misconfigurations and implemented encryption and IAM best practices.
 - Conducted network discovery, assessed segmentation, and recommended improvements.
-- Coordinated with internal teams and external auditors to resolve findings and ensure compliance.
+- Coordinated with internal and external auditors to resolve findings and ensure compliance.
 - Automated vulnerability scanning and reporting for web and cloud assets.
 - Developed custom scripts to streamline security operations and evidence collection.
-- Supported incident response activities and root cause analysis for security events.
+- Supported incident response and root cause analysis.
 - Delivered security awareness sessions to engineering and support teams.
 - Maintained up-to-date documentation for security processes and controls.
+- Led VAPT engagements and authored detailed security assessment reports.
+- Supported incident response activities and root cause analysis for security events.
+  
+*Skills: Penetration Testing, Secure Code Review, SDLC Integration, CI/CD Security, Mobile Security*
 
-**IT Recruitment Roles**  
-*Dec 2011 – Sep 2014*
-- Resource Specialist at ASK Staffing Inc (Jul 2014 – Sep 2014).
-- Recruiter at Radiant Systems Inc (Jul 2013 – Jun 2014).
-- IT Recruiter at Derive (2aspire) (Dec 2011 – Jun 2013).
+**ASK Staffing Inc · Radiant Systems Inc · Derive, Hyderabad, Telangana, India**  
+IT Recruitment Roles  
+*Dec 2011 - Sep 2014*
+
+- Resource Specialist at ASK Staffing Inc (Jul 2014 - Sep 2014).
+- Recruiter at Radiant Systems Inc (Jul 2013 - Jun 2014).
+- IT Recruiter at Derive (2aspire) (Dec 2011 - Jun 2013).
 - Managed full-cycle recruitment and technical screenings.
 - Automated candidate tracking and outreach with Excel macros and VBA.
-
----
+  
+*Skills: Recruitment, Technical Screening, Automation*
 
 ### **Education & Certifications**
 
-- **M.S. in Software Systems** – BITS Pilani (Expected 2026)
-- **B.Tech in Computer Science** – JNTU Hyderabad (2011)
+- **Master's in Technology in Software Systems (Security Specialization)** – Birla Institute of Technology And Science. (BITS-WILP) (2024 - 2026(Tentative))
+- **Bachelor's Of Technology in Computer Science** – Jawaharlal Nehru Technological University. Hyderabad (2007 - 2011)
 - **Certifications:**
-  - ISC2 Certified in CyberSecurity (2024)
-  - EC-Council CEH v7 (May 2013)
+  - Certified Ethical Hacker - C|EH-V7 (2013)
+  - ISC2 Certified in CyberSecurity (CC) (2024)
 
 ---
 
 ### **Trainings & Badges**
 
-- MITRE ATT&CK Defender (MAD) – ATT&CK Fundamentals
-- AttackIQ – Foundations of Operationalizing MITRE ATT&CK
-- AttackIQ – Foundations of Breach & Attack Simulation
-- AttackIQ – Foundations of Purple Teaming
+- MITRE ATT&CK Defender (MAD) - ATT&CK Fundamentals
+- AttackIQ - Foundations of Operationalizing MITRE ATT&CK
+- AttackIQ - Foundations of Breach & Attack Simulation
+- AttackIQ - Foundations of Purple Teaming
 
 ---
 
 ### **Projects & Contributions**
 
-- **AI-enhanced Burp Extension:** Reduced manual triage by 40% using OpenAI/Gemini to analyze HTTP traffic.
-- **Security Metrics Dashboard:** Unified Checkmarx, Nexpose, and Uptycs data into Grafana via Prometheus exporters.
-- **Automated Red Team Playbooks:** Standardized MITRE-mapped simulations with Python scripts for Caldera and AttackIQ.
+- **Security Framework Implementation:** Developed and implemented a comprehensive security framework for a financial institution's web applications, reducing security incidents by 45%. (OWASP, Security Architecture, Risk Assessment)
+- **Automated Security Testing Pipeline:** Created an automated security testing pipeline integrated with Jenkins, catching 85% of security issues before production deployment. (DevSecOps, CI/CD, SAST/DAST)
+- **Security Awareness Training Program:** Designed and delivered a company-wide security awareness program, resulting in a 60% decrease in successful phishing attempts. (Security Awareness, Training, Social Engineering)
+- **API Security Gateway:** Implemented an API security gateway with robust authentication and authorization controls for a healthcare application handling sensitive data. (API Security, OAuth 2.0, Rate Limiting)
+- **AI-enhanced Burp Extension:** Reduced manual triage by 40% using OpenAI/Gemini to analyze HTTP traffic. (Burp Suite, AI, Pentesting)
+- **Security Metrics Dashboard:** Unified Checkmarx, Nexpose, and Uptycs data into Grafana via Prometheus exporters. (Grafana, SIEM, Automation)
+- **Automated Red Team Playbooks:** Standardized MITRE-mapped simulations with Python scripts for Caldera and AttackIQ. (MITRE ATT&CK, Red Teaming, Python)
 
 ---
 
@@ -135,3 +173,5 @@ Security Analyst
 
 - GitHub: [mahi0x00](https://github.com/mahi0x00)
 - Resume: [mahi0x00.github.io/resume](https://mahi0x00.github.io/resume)
+
+*Updated 2026-02-13 · Generated from resumeData.json (single source of truth).*

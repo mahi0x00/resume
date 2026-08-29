@@ -13,10 +13,12 @@
     "email": "mahendhar.kadari+resume@gmail.com",
     "github": "mahi0x00",
     "linkedin": "mahi0x00",
-    "resumePdf": "#"
+    "resumePdf": "#",
+    "phone": "+91-9666569659",
+    "location": "Hyderabad, Telangana, India"
   },
   "about": [
-    "10+ years of experience in Application Security and SSDLC",
+    "11+ years of experience in Application Security and SSDLC",
     "Expert in DevSecOps, threat modeling, SAST, and SCA",
     "Conducted web and API penetration testing in fintech",
     "Built Burp Suite extensions for AI Augmented Penetration testing",
@@ -26,7 +28,11 @@
     "Implemented NeMo Guardrails to enforce LLM safety",
     "Automated security workflows with n8n and Langflow",
     "Validated LLM inputs/outputs to prevent data leakage",
-    "Won hackathon for building AI–API interoperability server"
+    "Won hackathon for building AI–API interoperability server",
+    "Proven expertise in threat modeling, penetration testing, and compliance (PCI-DSS, SOC2, SOC3)",
+    "Deep experience in AWS cloud security, including automation, monitoring, and compliance",
+    "Skilled in building AI-driven security tools and dashboards",
+    "Strong collaborator with cross-functional teams to enhance enterprise security posture"
   ],
   "skills": [
     {
@@ -78,22 +84,6 @@
       ]
     }
   ],
-  "education": [
-    {
-      "title": "Master's in Technology in Software Systems (Security Specialization)",
-      "institution": "Birla Institute of Technology And Science. (BITS-WILP)",
-      "location": "Hyderabad, Telangana, India",
-      "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/BITS_Pilani-Logo.svg/1920px-BITS_Pilani-Logo.svg.png",
-      "period": "2024 - 2026(Tentative)"
-    },
-    {
-      "title": "Bachelor's Of Technology in Computer Science",
-      "institution": "Jawaharlal Nehru Technological University. Hyderabad",
-      "location": "Hyderabad, Telangana, India",
-      "logo": "https://upload.wikimedia.org/wikipedia/en/e/ea/JNTU_Hyderabad_logo.png",
-      "period": "2007 - 2011"
-    }
-  ],
   "experience": [
     {
       "title": "Senior Specialist - Software Engineering",
@@ -131,7 +121,24 @@
         "Built internal AI-driven workflow automations using n8n and Langflow to streamline security processes",
         "Won company-wide hackathon for building an MCP Server enabling secure AI-to-API interoperability",
         "Enforced secure AI practices including input/output sanitization, training data scrubbing, and third-party library validation",
-        "Collaborated with ML, data, and engineering teams to ensure end-to-end LLM governance and privacy protection"
+        "Collaborated with ML, data, and engineering teams to ensure end-to-end LLM governance and privacy protection",
+        "Embedded security in SSDLC using Jira, Confluence, GitHub.",
+        "Led threat modeling with STRIDE, Threat Dragon in Jira.",
+        "Set secure coding standards; integrated SAST in CI/CD.",
+        "Enabled secret scanning with GitHub Advanced Security.",
+        "Managed SCA with Whitesource for open-source, containers.",
+        "Automated IaC scans for Terraform using Checkov tool.",
+        "Ran web/API pentests with Burp Suite and Kali tools.",
+        "Automated compliance checks for PCI, SOC2, SOC3 needs.",
+        "Enforced AWS security: IAM, KMS, Security Groups, VPC.",
+        "Automated cloud monitoring with Config, Hub, GuardDuty.",
+        "Built Lambda for auto-remediation, tagging in AWS cloud.",
+        "Maintained audit-ready evidence with CloudTrail, S3.",
+        "Developed Python/Bash scripts for vuln, evidence mgmt.",
+        "Secured fintech apps, infra, data with AWS automation.",
+        "Evaluated AI (OpenAI/Gemini) for security workflows.",
+        "Advised on security best practices for AI adoption.",
+        "Ran a hackathon for Security Awareness Month."
       ],
       "skills": [
         "SSDLC",
@@ -189,7 +196,9 @@
         "Developed custom scripts to streamline security operations and evidence collection.",
         "Supported incident response and root cause analysis.",
         "Delivered security awareness sessions to engineering and support teams.",
-        "Maintained up-to-date documentation for security processes and controls."
+        "Maintained up-to-date documentation for security processes and controls.",
+        "Led VAPT engagements and authored detailed security assessment reports.",
+        "Supported incident response activities and root cause analysis for security events."
       ],
       "skills": [
         "Penetration Testing",
@@ -199,21 +208,6 @@
         "Mobile Security"
       ]
     }
-  ],
-  "certifications": [
-    {
-      "title": "Certified Ethical Hacker - C|EH-V7",
-      "year": "2013",
-      "logo": "https://cloudtechfortune.com/wp-content/uploads/2021/06/Certified-Ethical-Hacker.png"
-    }
-  ],
-  "credlyBadges": [
-    "28a349a2-2762-4152-80c8-d0936b6aab66",
-    "95fdbb31-20f1-496f-9ccd-d075192a38eb",
-    "66dc47d8-bb96-4000-b266-3a5d943f626b",
-    "d3115eff-fb8b-487a-93b1-b8cc51eca0dd",
-    "85afefbe-c7b7-42a6-8547-e06f20cc0b2b",
-    "e32b97b4-e7bf-4142-8f03-33ff84c4d8e3"
   ],
   "projects": [
     {
@@ -251,7 +245,70 @@
         "OAuth 2.0",
         "Rate Limiting"
       ]
+    },
+    {
+      "title": "AI-enhanced Burp Extension",
+      "description": "Reduced manual triage by 40% using OpenAI/Gemini to analyze HTTP traffic.",
+      "tags": [
+        "Burp Suite",
+        "AI",
+        "Pentesting"
+      ]
+    },
+    {
+      "title": "Security Metrics Dashboard",
+      "description": "Unified Checkmarx, Nexpose, and Uptycs data into Grafana via Prometheus exporters.",
+      "tags": [
+        "Grafana",
+        "SIEM",
+        "Automation"
+      ]
+    },
+    {
+      "title": "Automated Red Team Playbooks",
+      "description": "Standardized MITRE-mapped simulations with Python scripts for Caldera and AttackIQ.",
+      "tags": [
+        "MITRE ATT&CK",
+        "Red Teaming",
+        "Python"
+      ]
     }
+  ],
+  "education": [
+    {
+      "title": "Master's in Technology in Software Systems (Security Specialization)",
+      "institution": "Birla Institute of Technology And Science. (BITS-WILP)",
+      "location": "Hyderabad, Telangana, India",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/BITS_Pilani-Logo.svg/1920px-BITS_Pilani-Logo.svg.png",
+      "period": "2024 - 2026(Tentative)"
+    },
+    {
+      "title": "Bachelor's Of Technology in Computer Science",
+      "institution": "Jawaharlal Nehru Technological University. Hyderabad",
+      "location": "Hyderabad, Telangana, India",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/e/ea/JNTU_Hyderabad_logo.png",
+      "period": "2007 - 2011"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Certified Ethical Hacker - C|EH-V7",
+      "year": "2013",
+      "logo": "https://cloudtechfortune.com/wp-content/uploads/2021/06/Certified-Ethical-Hacker.png"
+    },
+    {
+      "title": "ISC2 Certified in CyberSecurity (CC)",
+      "year": "2024",
+      "logo": "https://images.credly.com/images/2030e43f-8003-4d4b-9630-847add403c87/linkedin_thumb_image.png"
+    }
+  ],
+  "credlyBadges": [
+    "28a349a2-2762-4152-80c8-d0936b6aab66",
+    "95fdbb31-20f1-496f-9ccd-d075192a38eb",
+    "66dc47d8-bb96-4000-b266-3a5d943f626b",
+    "d3115eff-fb8b-487a-93b1-b8cc51eca0dd",
+    "85afefbe-c7b7-42a6-8547-e06f20cc0b2b",
+    "e32b97b4-e7bf-4142-8f03-33ff84c4d8e3"
   ],
   "tools": [
     {
@@ -346,5 +403,103 @@
       "name": "Jenkins",
       "logo": "https://www.learntek.org/blog/wp-content/uploads/2018/05/jenkins_image.png"
     }
+  ],
+  "hiddenExperience": [
+    {
+      "title": "IT Recruitment Roles",
+      "company": "ASK Staffing Inc · Radiant Systems Inc · Derive",
+      "location": "Hyderabad, Telangana, India",
+      "logo": "",
+      "period": "Dec 2011 - Sep 2014",
+      "responsibilities": [
+        "Resource Specialist at ASK Staffing Inc (Jul 2014 - Sep 2014).",
+        "Recruiter at Radiant Systems Inc (Jul 2013 - Jun 2014).",
+        "IT Recruiter at Derive (2aspire) (Dec 2011 - Jun 2013).",
+        "Managed full-cycle recruitment and technical screenings.",
+        "Automated candidate tracking and outreach with Excel macros and VBA."
+      ],
+      "skills": [
+        "Recruitment",
+        "Technical Screening",
+        "Automation"
+      ]
+    }
+  ],
+  "technicalSkills": [
+    {
+      "category": "Languages",
+      "items": [
+        "Python",
+        "Groovy",
+        "Bash"
+      ]
+    },
+    {
+      "category": "Cloud",
+      "items": [
+        "AWS (IAM, S3, Lambda, EC2, RDS, Security Hub, GuardDuty, CloudTrail, Config, VPC, KMS)"
+      ]
+    },
+    {
+      "category": "DevSecOps",
+      "items": [
+        "Jenkins",
+        "Spinnaker",
+        "GitHub Security",
+        "Checkmarx",
+        "Whitesource"
+      ]
+    },
+    {
+      "category": "Security Tools",
+      "items": [
+        "Burp Suite",
+        "OWASP ZAP",
+        "Nmap",
+        "SQLMap",
+        "Wireshark",
+        "Metasploit",
+        "STRIDE",
+        "MITRE Caldera",
+        "AttackIQ",
+        "OpenBAS"
+      ]
+    },
+    {
+      "category": "Container & Infra",
+      "items": [
+        "Anchore",
+        "Prisma",
+        "Tenable",
+        "OpenVAS",
+        "NeXpose"
+      ]
+    },
+    {
+      "category": "Monitoring & SIEM",
+      "items": [
+        "Prometheus",
+        "Grafana",
+        "Splunk",
+        "ELK Stack",
+        "Uptycs"
+      ]
+    },
+    {
+      "category": "Automation & AI",
+      "items": [
+        "AWS Lambda",
+        "OpenAI/Gemini",
+        "N8n",
+        "MCP Servers",
+        "custom scripts"
+      ]
+    }
+  ],
+  "trainings": [
+    "MITRE ATT&CK Defender (MAD) - ATT&CK Fundamentals",
+    "AttackIQ - Foundations of Operationalizing MITRE ATT&CK",
+    "AttackIQ - Foundations of Breach & Attack Simulation",
+    "AttackIQ - Foundations of Purple Teaming"
   ]
 }
