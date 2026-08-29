@@ -56,6 +56,8 @@ Senior Application Security Engineer
 - Performed comprehensive web and API penetration testing on high-risk and high-scale systems
 - Developed custom Burp Suite extensions powered by Gemini and ChatGPT to augment pentesting workflows
 - Conducted LLM red-teaming assessments focused on prompt injection, jailbreaks, hallucinations, and data leakage risks
+- Automated LLM vulnerability testing using Giskard's open-source framework
+- Leveraged NVIDIA Garak (auto red-team module, probes, detectors, harnesses) to scan LLMs for prompt injection, hallucinations, safety bypasses, and toxicity
 - Applied NVIDIA NeMo Guardrails to control and filter unsafe or unauthorized LLM behavior
 - Built internal AI-driven workflow automations using n8n and Langflow to streamline security processes
 - Won company-wide hackathon for building an MCP Server enabling secure AI-to-API interoperability
@@ -78,8 +80,6 @@ Senior Application Security Engineer
 - Evaluated AI (OpenAI/Gemini) for security workflows.
 - Advised on security best practices for AI adoption.
 - Ran a hackathon for Security Awareness Month.
-- Automated LLM vulnerability testing using Giskard's open-source framework
-- Leveraged NVIDIA Garak (auto red-team module, probes, detectors, harnesses) to scan LLMs for prompt injection, hallucinations, safety bypasses, and toxicity
   
 *Skills: SSDLC, DevSecOps, LLM Security, Workflow Automation, Web and API Penetration Testing*
 
@@ -137,8 +137,8 @@ IT Recruitment Roles
 
 ### **Education & Certifications**
 
-- **Master's in Technology in Software Systems (Security Specialization)** – Birla Institute of Technology And Science. (BITS-WILP) (2024 - 2026(Tentative))
-- **Bachelor's Of Technology in Computer Science** – Jawaharlal Nehru Technological University. Hyderabad (2007 - 2011)
+- **Master's in Technology in Software Systems (Security Specialization)** – Birla Institute of Technology and Science (BITS-WILP) (2024 - 2026(Tentative))
+- **Bachelor of Technology in Computer Science** – Jawaharlal Nehru Technological University (2007 - 2011)
 - **Certifications:**
   - Certified Ethical Hacker - C|EH-V7 (2013)
   - ISC2 Certified in CyberSecurity (CC) (2024)

@@ -114,6 +114,8 @@
         "Performed comprehensive web and API penetration testing on high-risk and high-scale systems",
         "Developed custom Burp Suite extensions powered by Gemini and ChatGPT to augment pentesting workflows",
         "Conducted LLM red-teaming assessments focused on prompt injection, jailbreaks, hallucinations, and data leakage risks",
+        "Automated LLM vulnerability testing using Giskard's open-source framework",
+        "Leveraged NVIDIA Garak (auto red-team module, probes, detectors, harnesses) to scan LLMs for prompt injection, hallucinations, safety bypasses, and toxicity",
         "Applied NVIDIA NeMo Guardrails to control and filter unsafe or unauthorized LLM behavior",
         "Built internal AI-driven workflow automations using n8n and Langflow to streamline security processes",
         "Won company-wide hackathon for building an MCP Server enabling secure AI-to-API interoperability",
@@ -135,9 +137,7 @@
         "Secured fintech apps, infra, data with AWS automation.",
         "Evaluated AI (OpenAI/Gemini) for security workflows.",
         "Advised on security best practices for AI adoption.",
-        "Ran a hackathon for Security Awareness Month.",
-        "Automated LLM vulnerability testing using Giskard's open-source framework",
-        "Leveraged NVIDIA Garak (auto red-team module, probes, detectors, harnesses) to scan LLMs for prompt injection, hallucinations, safety bypasses, and toxicity"
+        "Ran a hackathon for Security Awareness Month."
       ],
       "skills": [
         "SSDLC",
@@ -274,14 +274,14 @@
   "education": [
     {
       "title": "Master's in Technology in Software Systems (Security Specialization)",
-      "institution": "Birla Institute of Technology And Science. (BITS-WILP)",
+      "institution": "Birla Institute of Technology and Science (BITS-WILP)",
       "location": "Hyderabad, Telangana, India",
       "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/BITS_Pilani-Logo.svg/1920px-BITS_Pilani-Logo.svg.png",
       "period": "2024 - 2026(Tentative)"
     },
     {
-      "title": "Bachelor's Of Technology in Computer Science",
-      "institution": "Jawaharlal Nehru Technological University. Hyderabad",
+      "title": "Bachelor of Technology in Computer Science",
+      "institution": "Jawaharlal Nehru Technological University",
       "location": "Hyderabad, Telangana, India",
       "logo": "https://upload.wikimedia.org/wikipedia/en/e/ea/JNTU_Hyderabad_logo.png",
       "period": "2007 - 2011"
@@ -317,11 +317,11 @@
       "logo": "https://azure.github.io/PyRIT/_static/roakey.png"
     },
     {
-      "name": "Nvidia Garak",
+      "name": "NVIDIA Garak",
       "logo": "https://pbs.twimg.com/profile_images/1684796654929727489/z69m4Q-G_400x400.jpg"
     },
     {
-      "name": "nmap",
+      "name": "Nmap",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/7/73/Logo_nmap.png?20230731104508"
     },
     {
@@ -349,7 +349,7 @@
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tenable%2C_Inc._logo.svg/1598px-Tenable%2C_Inc._logo.svg.png?20240929020540"
     },
     {
-      "name": "Mitre ATT&CK",
+      "name": "MITRE ATT&CK",
       "logo": "https://images.squarespace-cdn.com/content/v1/5ab952d7506fbeaa1f512f11/1586076420678-9G5MBZOQJLH0WXKP42V3/5bfdce88cd3820f7c5c21e02_mitre.png?format=1500w"
     },
     {
@@ -381,7 +381,7 @@
       "logo": "https://www.bizstream.com/wp-content/uploads/2022/04/microsoft-azure-logo.png"
     },
     {
-      "name": "Github",
+      "name": "GitHub",
       "logo": "https://1000logos.net/wp-content/uploads/2018/11/GitHub-logo.jpg"
     },
     {
