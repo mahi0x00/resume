@@ -174,4 +174,4 @@ IT Recruitment Roles
 - GitHub: [mahi0x00](https://github.com/mahi0x00)
 - Resume: [mahi0x00.github.io/resume](https://mahi0x00.github.io/resume)
 
-*Updated 2026-02-13 · Generated from resumeData.json (single source of truth).*
+*Updated 2026-08-29 · Generated from resumeData.json (single source of truth).*
