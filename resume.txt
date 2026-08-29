@@ -1,7 +1,7 @@
 **Mahendhar Reddy Kadari**\
 Senior Specialist - Software Engineering | Application Security | AI Security Advocate\
 Hyderabad, Telangana, India\
-+91-9666569659 | [mahendhar.kadari+resume@gmail.com](mailto:mahendhar.kadari+resume@gmail.com)\
++91-9666569659 | [mahendhar.kadari@gmail.com](mailto:mahendhar.kadari@gmail.com)\
 [LinkedIn](https://www.linkedin.com/in/mahi0x00/) | [Portfolio](https://mahi0x00.github.io/resume/)
 
 ---
@@ -137,10 +137,10 @@ IT Recruitment Roles
 
 ### **Education & Certifications**
 
-- **Master's in Technology in Software Systems (Security Specialization)** – Birla Institute of Technology and Science (BITS-WILP) (2024 - 2026(Tentative))
+- **Master of Technology in Software Systems (Security Specialization)** – Birla Institute of Technology and Science (BITS-WILP) (2024 - 2026(Tentative))
 - **Bachelor of Technology in Computer Science** – Jawaharlal Nehru Technological University (2007 - 2011)
 - **Certifications:**
-  - Certified Ethical Hacker - C|EH-V7 (2013)
+  - Certified Ethical Hacker (CEH) (2013)
   - ISC2 Certified in CyberSecurity (CC) (2024)
 
 ---

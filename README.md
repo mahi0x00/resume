@@ -35,7 +35,7 @@ Top-level keys in `resumeData.json`:
 | Key | Purpose | Rendered by |
 |---|---|---|
 | `meta` | page title, description, last-updated | site |
-| `personal` | name, title, email, github, linkedin, phone, location, profile image | site + txt |
+| `personal` | name, title, email (site), txtEmail (plain-text resume), github, linkedin, phone, location, profile image | site + txt |
 | `about` | summary bullets | site + txt (Professional Summary) |
 | `skills` | SSDLC category cards | site |
 | `experience` | work history (newest first) | site + txt |

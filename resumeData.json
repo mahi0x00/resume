@@ -15,7 +15,8 @@
     "linkedin": "mahi0x00",
     "resumePdf": "#",
     "phone": "+91-9666569659",
-    "location": "Hyderabad, Telangana, India"
+    "location": "Hyderabad, Telangana, India",
+    "txtEmail": "mahendhar.kadari@gmail.com"
   },
   "about": [
     "11+ years of experience in Application Security and SSDLC",
@@ -273,7 +274,7 @@
   ],
   "education": [
     {
-      "title": "Master's in Technology in Software Systems (Security Specialization)",
+      "title": "Master of Technology in Software Systems (Security Specialization)",
       "institution": "Birla Institute of Technology and Science (BITS-WILP)",
       "location": "Hyderabad, Telangana, India",
       "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/BITS_Pilani-Logo.svg/1920px-BITS_Pilani-Logo.svg.png",
@@ -289,7 +290,7 @@
   ],
   "certifications": [
     {
-      "title": "Certified Ethical Hacker - C|EH-V7",
+      "title": "Certified Ethical Hacker (CEH)",
       "year": "2013",
       "logo": "https://cloudtechfortune.com/wp-content/uploads/2021/06/Certified-Ethical-Hacker.png"
     },

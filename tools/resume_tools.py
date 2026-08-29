@@ -111,7 +111,7 @@ def render_txt(data=None):
     L.append(f"**{p['name']}**\\")
     L.append(f"{p['title']}\\")
     L.append(f"{p.get('location', 'Hyderabad, Telangana, India')}\\")
-    phone, email = p.get("phone", ""), p.get("email", "")
+    phone, email = p.get("phone", ""), p.get("txtEmail") or p.get("email", "")
     if phone and email:
         L.append(f"{phone} | [{email}](mailto:{email})\\")
     elif email:
